@@ -1,0 +1,27 @@
+.title-bar{
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+.arrow-icon {
+    font-size: 2rem !important;
+}
+
+.back {
+    margin: 0
+}
+
+.back-button{
+    display: inline;
+    margin-right: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #F9F0D9;
+}
+
+.title {
+    color: #255849;
+    font-size: 1.8rem;
+}

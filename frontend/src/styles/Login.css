@@ -1,0 +1,208 @@
+  .Auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color:#faf7ef;
+  }
+  
+  .Auth-form {
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+  }
+  
+  .Auth-form-content {
+    padding-left: 12%;
+    padding-right: 12%;
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .top-bar {
+    position: absolute;
+    height: 100px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .form-210team4 {
+    width: 150px;
+    height: 24px;
+    padding-top: 30px;
+    padding-left: 20px;
+
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+
+    color: #255849;
+
+    opacity: 0.1;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+
+  .form-home {
+    position: absolute;
+    width: 52px;
+    height: 24px;
+    left: 631px;
+    top: 41px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 100%;
+    /* identical to box height, or 24px */
+
+
+    color: #255849;
+
+  }
+  
+  .Welcome-to-housing {
+
+    /* Welcome to Housing Safari in San Diego */
+
+    position: absolute;
+    width: 1011px;
+    height: 202px;
+    left: 120px;
+    top: 30px;
+
+    font-family: 'Abhaya Libre';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 120%;
+    /* or 101px */
+
+    text-align: center;
+
+    color: #255849;
+  }
+
+
+  .form-email {
+    position: absolute;
+    width: 105px;
+    height: 76px;
+    left: 251px;
+    top: 370px;
+    /* border: 10px solid red; */
+    
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 140%;
+    /* identical to box height, or 56px */
+
+    text-align: center;
+
+    color: #255849;
+  }
+
+  .placeholder {
+    position: absolute;
+    width: 535px;
+    height: 60px;
+    left: 225px;
+    top: 0px;
+    border: 1px solid #F1EDE3;
+    background-color: #F1EDE3;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+    /* identical to box height, or 34px */
+
+
+    color: rgba(0, 0, 0, 0.33); 
+  }
+
+  .form-password {
+    position: absolute;
+    width: 170px;
+    height: 76px;
+    left: 251px;
+    top: 470px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 140%;
+    /* identical to box height, or 56px */
+
+    text-align: center;
+
+    color: #255849;
+
+  }
+
+  .login-button {
+    position: absolute;
+    width: 164px;
+    height: 65px;
+    left: 544px;
+    top: 600px;
+
+    background: #255849;
+    border-radius: 40px;
+    
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 120%;
+    /* identical to box height, or 48px */
+    
+    text-align: center;
+    
+    color: #FFFFFF;
+  }
+
+  .forgot-password {
+    align-content: center;
+    justify-content: center;
+    position: absolute;
+    width: 200px;
+    height: 34px;
+    left: 532px;
+    top: 670px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    /* identical to box height, or 34px */
+
+
+    color: rgba(0, 0, 0, 0.33);
+  }

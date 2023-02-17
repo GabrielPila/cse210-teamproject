@@ -1,5 +1,7 @@
 import App from '../pages/App.js';
 import ReviewPage from '../pages/ReviewPage.js';
+import Login from '../pages/Login.js';
+
 const routes = [
         {
           path: "/",
@@ -12,7 +14,11 @@ const routes = [
         {
             path: "/reviewPage",
             element: <ReviewPage />,
-          },
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        }
 ];
 
 export default routes;

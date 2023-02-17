@@ -1,0 +1,15 @@
+.appbar {
+    background-color: #faf7ef !important;
+    box-shadow: none !important;
+    color: #255849 !important;
+}
+
+.appbar-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.roof-icon {
+    margin-right: 5px;
+}

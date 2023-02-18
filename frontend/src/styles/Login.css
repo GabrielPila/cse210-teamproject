@@ -28,14 +28,14 @@
     top: 0px;
   }
 
-  .top-bar {
+  /* .top-bar {
     position: absolute;
     height: 100px;
     left: 0px;
     right: 0px;
     top: 0px;
-  }
-
+  } */
+/* 
   .form-210team4 {
     width: 150px;
     height: 24px;
@@ -47,7 +47,6 @@
     font-weight: 600;
     font-size: 24px;
     line-height: 100%;
-    /* identical to box height, or 24px */
 
     letter-spacing: 0.02em;
 
@@ -55,14 +54,12 @@
 
     opacity: 0.1;
 
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     flex-grow: 0;
-  }
+  } */
 
-  .form-home {
+  /* .form-home {
     position: absolute;
     width: 52px;
     height: 24px;
@@ -74,12 +71,8 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 100%;
-    /* identical to box height, or 24px */
-
-
     color: #255849;
-
-  }
+  } */
   
   .Welcome-to-housing {
 

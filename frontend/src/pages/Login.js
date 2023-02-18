@@ -1,11 +1,12 @@
 import "../styles/Login.css";
+import LoginNavbar from "../components/LoginNavbar"
 
 function Login() {
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
-          <div className="top-bar">
+          {/* <div className="top-bar">
             <div className="form-210team4">
               <label>210 Team4</label>
             </div>
@@ -13,7 +14,8 @@ function Login() {
               <label>Home</label>
             </div>
             
-          </div>
+          </div> */}
+          <LoginNavbar />
           <h3 className="Welcome-to-housing">Welcome to Housing Safari in San Diego</h3>
           <div className="form-email">
             <label>Email</label>

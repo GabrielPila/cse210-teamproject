@@ -1,0 +1,69 @@
+.dropdown2 {
+    user-select: none;
+
+    position: absolute;
+    width: 180px;
+    height: 65px;
+    left: 780px;
+    top: 0px;
+
+    background: rgba(37, 88, 73, 0.36);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+}
+
+.dropdown2 .dropdown2-btn {
+    position: absolute;
+    width: 170px;
+    height: 65px;
+    left: 0px;
+    top: 0px;
+
+    background: rgba(37, 88, 73, 0.36);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+
+    padding-left: 10px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    /* identical to box height, or 34px */
+
+    color: rgba(0, 0, 0, 0.33);
+}
+
+.dropdown2 .dropdown2-content {
+    position: absolute;
+    z-index: 100;
+    top: 110%;
+    left: 0;
+    padding: 10px;
+    background: rgba(37, 88, 73, 0.36);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: rgba(70, 168, 138, 0.36);
+    font-weight: 500;
+    color: #333;
+    width: 95%;
+}
+
+.dropdown2 .dropdown2-content .dropdown2-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown2 .dropdown2-content .dropdown2-item:hover {
+    background: #61b79d;
+    border-radius: 20px;
+}

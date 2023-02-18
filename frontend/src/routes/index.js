@@ -1,6 +1,7 @@
 import App from '../pages/App.js';
 import ReviewPage from '../pages/ReviewPage.js';
 import Login from '../pages/Login.js';
+import SearchPage from '../pages/SearchPage.js';
 
 const routes = [
         {
@@ -18,6 +19,10 @@ const routes = [
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/search",
+          element: <SearchPage />,
         }
 ];
 

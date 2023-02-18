@@ -1,0 +1,159 @@
+.Auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color:#faf7ef;
+  }
+  
+  .Auth-form {
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+  }
+  
+  .Auth-form-content {
+    padding-left: 12%;
+    padding-right: 12%;
+    position: absolute;
+    height: 832px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+  }
+  
+  .Find-home-with-san-diego-safari {
+
+    /* Find Your Home with San Diego Housing Safari */
+
+    position: absolute;
+    width: 1254px;
+    height: 138px;
+    left: 14px;
+    top: 100px;
+
+    font-family: 'Abhaya Libre';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 120%;
+    /* or 77px */
+
+    text-align: center;
+
+    color: #255849;
+
+  }
+
+
+  .search-forms {
+    position: absolute;
+    height: 76px;
+    left: 5px;
+    top: 350px;
+    /* border: 1px solid red; */
+  }
+
+  .location-placeholder {
+
+    position: absolute;
+    width: 450px;
+    height: 65px;
+    left: 100px;
+    top: 0px;
+
+    border-color: rgba(70, 168, 138, 0.36);
+    background-color: rgba(70, 168, 138, 0.36);
+    border-radius: 20px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+    /* identical to box height, or 34px */
+
+
+    color: rgba(0, 0, 0, 0.33);
+  }
+
+  .price-placeholder {
+    position: absolute;
+    width: 535px;
+    height: 60px;
+    left: 225px;
+    top: 0px;
+    border: 1px solid #F1EDE3;
+    background-color: #F1EDE3;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+    /* identical to box height, or 34px */
+
+
+    color: rgba(0, 0, 0, 0.33); 
+  }
+
+  .movein-placeholder {
+    position: absolute;
+    width: 535px;
+    height: 60px;
+    left: 225px;
+    top: 0px;
+    border: 1px solid #F1EDE3;
+    background-color: #F1EDE3;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+    /* identical to box height, or 34px */
+
+
+    color: rgba(0, 0, 0, 0.33); 
+  }
+
+  .search-button {
+    position: absolute;
+    width: 164px;
+    height: 65px;
+    left: 1065px;
+    top: 0px;
+
+    background: #255849;
+    border-radius: 40px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 120%;
+    /* identical to box height, or 48px */
+
+    text-align: center;
+
+    color: #FFFFFF;
+  }
+
+  .search_pic {
+    position: absolute;
+    left: 0px;
+    width: 1200px;
+    bottom: 0px;
+    height: 390px;
+    /* left: calc(50% - 1362px/2 - 39.5px); */
+    /* top: calc(50% - 458px/2 + 197px); */
+  }

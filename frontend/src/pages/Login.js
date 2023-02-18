@@ -1,7 +1,14 @@
 import "../styles/Login.css";
-import LoginNavbar from "../components/LoginNavbar"
+import LoginNavbar from "../components/LoginNavbar";
+import {useNavigate} from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate();
+
+  const navigateToSearch = () => {
+    navigate('/search');
+  };
+
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
@@ -33,7 +40,7 @@ function Login() {
               placeholder="Enter password..."
             />
           </div>
-          <button type="Login" className="login-button">
+          <button type="Login" className="login-button" onClick={navigateToSearch}>
             <a >Log In</a>
           </button>
           <p className="forgot-password">

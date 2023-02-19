@@ -16,6 +16,10 @@ export default function SearchNavbar() {
     navigate('/login');
   };
 
+  const navigateToSignup = () => {
+    navigate('/signup');
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className="appbar">
@@ -25,8 +29,8 @@ export default function SearchNavbar() {
                 <RoofingIcon className="roof-icon"/>
                 210 Team 4
             </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <a href="#">Register</a>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={navigateToSignup}>
+                <a>Register</a>
             </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={navigateToLogIn}>
                 <a>Login</a>

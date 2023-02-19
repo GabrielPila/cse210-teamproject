@@ -2,6 +2,7 @@ import App from '../pages/App.js';
 import ReviewPage from '../pages/ReviewPage.js';
 import Login from '../pages/Login.js';
 import SearchPage from '../pages/SearchPage.js';
+import Signup from '../pages/Signup.js';
 
 const routes = [
         {
@@ -19,6 +20,10 @@ const routes = [
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/search",

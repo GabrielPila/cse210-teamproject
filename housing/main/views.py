@@ -9,6 +9,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
+from rest_framework.parsers import JSONParser
+from rest_framework import views, status
+
+from .serializers import UserSerializer, LandlordSerializer, HomeSerializer, ReservationSerializer
+
 
 class HomeView(APIView):
 
@@ -44,3 +49,131 @@ class SignUpView(APIView):
 
         token = Token.objects.create(user=user)
         return Response({'token': token.key})
+
+
+
+
+# Model views from here
+
+class UserAPIView(views.APIView):
+    """
+    A simple APIView for creating User entires.
+    """
+    serializer_class = UserSerializer
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
+    def post(self, request):
+        try:
+            data = JSONParser().parse(request)
+            serializer = UserSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except JSONDecodeError:
+            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+
+
+
+
+class LandlordAPIView(views.APIView):
+    """
+    A simple APIView for creating Landlord entires.
+    """
+    serializer_class = LandlordSerializer
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
+    def post(self, request):
+        try:
+            data = JSONParser().parse(request)
+            serializer = LandlordSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except JSONDecodeError:
+            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+
+
+
+class HomeAPIView(views.APIView):
+    """
+    A simple APIView for creating Home entires.
+    """
+    serializer_class = HomeSerializer
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
+    def post(self, request):
+        try:
+            data = JSONParser().parse(request)
+            serializer = HomeSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except JSONDecodeError:
+            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+
+
+
+class ReservationAPIView(views.APIView):
+    """
+    A simple APIView for creating Reservation entires.
+    """
+    serializer_class = ReservationSerializer
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
+    def post(self, request):
+        try:
+            data = JSONParser().parse(request)
+            serializer = ReservationSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except JSONDecodeError:
+            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)

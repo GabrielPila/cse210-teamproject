@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com.css?family=Playfair+Display:600|Abel:400|Abhaya+Libre:400|AbeeZee:400,400italic|Coda:400");
+
+.review-page{
+    align-items: center;
+    background-color: #faf7ef;
+    border: 1px none;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
+}
+
+.section-1{
+    height: 75%;
+    background-color: #faf7ef;
+    overflow-y: auto;
+}

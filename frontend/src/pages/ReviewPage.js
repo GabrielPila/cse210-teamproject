@@ -14,8 +14,7 @@ const commentData = {
 const ReviewPage = () => {
     const {text1, text2, text3, text4, text5, sharingYourExperienceWithUs} = commentData
     return (
-    <div className="container-center-horizontal">
-        <Container className="comment screen">
+        <Container className="review-page" maxWidth={false}>
             <Navbar />
             <Titlebar title="Rate Your Stay..."/>
             <div className="section-1">
@@ -34,7 +33,6 @@ const ReviewPage = () => {
                 </p>
             </div>
         </Container>
-    </div>
     )
 }
 

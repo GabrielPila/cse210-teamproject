@@ -1,0 +1,17 @@
+.landlordInfo {
+    background-color: #C3B89D !important;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.landlordInfo-content {
+    padding-top: 1rem;
+    padding-left: 2rem;
+}
+
+.landlordInfo-content p {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}

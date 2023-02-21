@@ -13,6 +13,6 @@ urlpatterns = [
 
 #    path('user/', housing_views.ContactAPIView.as_view()),
 #    path('landlord/', housing_views.ContactAPIView.as_view()),
-#    path('home/', housing_views.ContactAPIView.as_view()),
+    path('home/', HomeAPIView.as_view()),
 #    path('reservation/', housing_views.ContactAPIView.as_view())
 ]

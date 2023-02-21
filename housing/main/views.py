@@ -12,8 +12,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.parsers import JSONParser
 from rest_framework import views, status
 
-from .serializers import UserSerializer, LandlordSerializer, HomeSerializer, ReservationSerializer
-
+from .serializers import UserSerializer, HomeSerializer, ReservationSerializer
+from .models import Landlord
 
 class HomeView(APIView):
 
@@ -39,13 +39,21 @@ class SignUpView(APIView):
 
         username = request.data.get('username')
         password = request.data.get('password')
+        email = request.data.get('email')
+        is_landlord = request.data.get('is_landlord', False)
 
         if User.objects.filter(username=username).exists():
             return Response({'message': "User already exists"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User(username=username)
         user.set_password(password)
+        user.email = email
         user.save()
+
+        landlord = Landlord(user = user, is_landlord = is_landlord)
+        landlord.save()
+
+
 
         token = Token.objects.create(user=user)
         return Response({'token': token.key})
@@ -87,34 +95,34 @@ class UserAPIView(views.APIView):
 
 
 
-class LandlordAPIView(views.APIView):
-    """
-    A simple APIView for creating Landlord entires.
-    """
-    serializer_class = LandlordSerializer
+# class LandlordAPIView(views.APIView):
+#     """
+#     A simple APIView for creating Landlord entires.
+#     """
+#     serializer_class = LandlordSerializer
 
-    def get_serializer_context(self):
-        return {
-            'request': self.request,
-            'format': self.format_kwarg,
-            'view': self
-        }
+#     def get_serializer_context(self):
+#         return {
+#             'request': self.request,
+#             'format': self.format_kwarg,
+#             'view': self
+#         }
 
-    def get_serializer(self, *args, **kwargs):
-        kwargs['context'] = self.get_serializer_context()
-        return self.serializer_class(*args, **kwargs)
+#     def get_serializer(self, *args, **kwargs):
+#         kwargs['context'] = self.get_serializer_context()
+#         return self.serializer_class(*args, **kwargs)
 
-    def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = LandlordSerializer(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+#     def post(self, request):
+#         try:
+#             data = JSONParser().parse(request)
+#             serializer = LandlordSerializer(data=data)
+#             if serializer.is_valid(raise_exception=True):
+#                 serializer.save()
+#                 return Response(serializer.data)
+#             else:
+#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         except JSONDecodeError:
+#             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
 
 
 

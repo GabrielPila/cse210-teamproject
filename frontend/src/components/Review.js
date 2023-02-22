@@ -1,11 +1,9 @@
 import "../styles/Review.css"
 
-const Review = ({rating, date, comment}) => {
+const Review = ({date, comment}) => {
     return (
         <div className="review-review">
-            <h1>Rating: {rating}/5</h1>
-            <h1>Date: {date}</h1>
-            <h1>Comment: {comment}</h1>
+            <span>{comment}</span><span>{date}</span>
         </div>
     )
 }

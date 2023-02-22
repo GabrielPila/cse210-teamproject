@@ -1,6 +1,5 @@
 import App from '../pages/App.js';
 import ReviewPage from '../pages/ReviewPage.js';
-import ReviewsPage from '../pages/ReviewsPage.js';
 import SingleListingPage from '../pages/SingleListingPage.js';
 import Login from '../pages/Login.js';
 import SearchPage from '../pages/SearchPage.js';
@@ -18,10 +17,6 @@ const routes = [
         {
             path: "/reviewPage",
             element: <ReviewPage />,
-        },
-        {
-          path: "/reviewsPage",
-          element: <ReviewsPage />,
         },
         {
           path: "/singleListingPage",

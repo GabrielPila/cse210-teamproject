@@ -15,3 +15,21 @@
     display: flex;
     align-items: center;
 }
+
+.landlord-icon-email{
+    color: white;
+}
+
+.landlord-icon-number{
+    color: rgb(64, 64, 215);
+}
+
+.landlord-icon-video{
+    color: rgb(103, 94, 94);
+}
+
+.landlord-icon-response{
+    color: rgb(37, 162, 23);
+    font-weight: 600;
+    margin-left: 1rem;
+}

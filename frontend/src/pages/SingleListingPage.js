@@ -1,9 +1,11 @@
-import { Container, Grid, useAutocomplete} from '@mui/material';
+import { Container, Grid} from '@mui/material';
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar"
 import Titlebar from "../components/Titlebar";
 import LandlordInfo from '../components/LandlordInfo';
 import "../styles/SingleListingPage.css"
+import ListingMain from '../components/ListingMain';
+import Reviews from "../components/Reviews"
 
 
 const SingleListingPage = () => {
@@ -13,6 +15,13 @@ const SingleListingPage = () => {
         number: "",
         videoAvailability: false,
         averageResponseTime: 1
+    })
+    const [mainInfo, setMainInfo] = useState({
+        price: 1000,
+        bedroom: 1,
+        bathroom: 1,
+        date: "June 1st 2023",
+        features: ["oven", "bathroom", "kitchen"]
     })
     const [reviews, setReviews] = useState([]);
     useEffect(()=> {
@@ -75,13 +84,13 @@ const SingleListingPage = () => {
                     images
                 </Grid>
                 <Grid item xs={8} className="grid-item-2">
-                    main
+                    <ListingMain {...mainInfo}/>
                 </Grid>
                 <Grid item xs={4} className="grid-item-3">
                     <LandlordInfo {...landlordInfo}/>
                 </Grid>
                 <Grid item xs={8} className="grid-item-4">
-                    comments
+                    <Reviews reviews={reviews}/>
                 </Grid>
             </Grid>
         </Container>

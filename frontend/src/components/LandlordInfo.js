@@ -10,10 +10,12 @@ const LandlordInfo = ({name, email, number, videoAvailability, averageResponseTi
         <div className="landlordInfo">
             <div className="landlordInfo-content">
                 <h1>{name}</h1>
-                <p><EmailIcon /> : {email}</p>
-                <p><PhoneIcon /> : {number}</p>
-                <p><VideocamIcon />: {videoAvailability ? <CheckCircleIcon /> : <CancelIcon /> }</p>
-                <p>Average Response Time: {averageResponseTime}hr</p>
+                <p><EmailIcon className="landlord-icon-email"/> :  {email}</p>
+                <p><PhoneIcon className="landlord-icon-number"/> :  {number}</p>
+                <p><VideocamIcon className="landlord-icon-video"/>:  {videoAvailability ? <CheckCircleIcon className="landlord-icon"/> : <CancelIcon className="landlord-icon"/> }</p>
+                <p>Average Response Time:  
+                    <span className="landlord-icon-response"> {averageResponseTime}hr </span>
+                </p>
             </div>
         </div>
     )

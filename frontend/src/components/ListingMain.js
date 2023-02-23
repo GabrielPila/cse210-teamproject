@@ -8,7 +8,10 @@ const ListingMain = ({price, bedroom, bathroom, date, features}) => {
             <div className="listingMain-content">
                <h1>${price}/ month</h1>
                <h3>{bedroom} bedroom {bathroom} bathroom</h3>
-               <h3><CalendarMonthIcon/>:{date}</h3>
+               <h3 className="listingMain-calendarMonthIcon-div">
+                    <CalendarMonthIcon />:
+                    <span className="listingMain-calendarMonthIcon-span">{date}</span>
+                </h3>
                <ul>
                {features.length !== 0 ? (
                     features.map((feature,i) => {

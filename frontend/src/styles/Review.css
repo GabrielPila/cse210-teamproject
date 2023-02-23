@@ -1,7 +1,8 @@
 .review-review{
     margin-top: 5px;
     padding: 5px;
-    padding-right: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     display: flex;
     justify-content: space-between;
 }

@@ -1,11 +1,16 @@
 .listingMain {
-
-}
-
-.listingMain-content{
-
+    padding: 1.5rem;
 }
 
 .list-feature {
     margin-top: 5px;
+}
+
+.listingMain-calendarMonthIcon-div{
+    display: flex;
+    align-items: center;
+}
+
+.listingMain-calendarMonthIcon-span{
+    margin-left: 0.5rem;
 }

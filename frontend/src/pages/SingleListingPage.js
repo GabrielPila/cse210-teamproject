@@ -6,9 +6,25 @@ import LandlordInfo from '../components/LandlordInfo';
 import "../styles/SingleListingPage.css"
 import ListingMain from '../components/ListingMain';
 import Reviews from "../components/Reviews"
+import SingleListingImageGallery from '../components/SingleListingImageGallery';
 
 
 const SingleListingPage = () => {
+    const images = [
+        {
+          original: 'https://picsum.photos/id/1018/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1018/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1015/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1015/250/150/',
+        },
+        {
+          original: 'https://picsum.photos/id/1019/1000/600/',
+          thumbnail: 'https://picsum.photos/id/1019/250/150/',
+        },
+      ];
+    const [avgRating, setAvgRating] = useState(0);
     const [landlordInfo, setLandlordInfo] = useState({
         name: "",
         email: "",
@@ -71,6 +87,13 @@ const SingleListingPage = () => {
             videoAvailability: false,
             averageResponseTime: 1
         }
+        
+        let total = 0
+        for (let review of newReviews){    
+            total += review.rating
+        }
+        const avg = total / newReviews.length;
+        setAvgRating(avg)
         setReviews(newReviews)
         setLandlordInfo(newLandlordInfo)
     }, [])
@@ -81,7 +104,7 @@ const SingleListingPage = () => {
             <Titlebar title={title}/>
             <Grid container spacing={1} className="grid-container">
                 <Grid item xs={4} className="grid-item-1">
-                    images
+                    <SingleListingImageGallery images={images}/>
                 </Grid>
                 <Grid item xs={8} className="grid-item-2">
                     <ListingMain {...mainInfo}/>
@@ -90,7 +113,7 @@ const SingleListingPage = () => {
                     <LandlordInfo {...landlordInfo}/>
                 </Grid>
                 <Grid item xs={8} className="grid-item-4">
-                    <Reviews reviews={reviews}/>
+                    <Reviews reviews={reviews} avgRating={avgRating}/>
                 </Grid>
             </Grid>
         </Container>

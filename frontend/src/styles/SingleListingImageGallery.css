@@ -1,0 +1,11 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+.singleListingImageGallery{
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.singleListingImageGallery-imageGallery{
+    height: 100% !important;
+    width: 100%;
+}

@@ -1,15 +1,22 @@
-import { Button } from '@mui/material';
+import { Button, Rating } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Review from '../components/Review';
 import "../styles/Reviews.css"
 
 
 
-const Reviews = ({reviews}) => {
+const Reviews = ({reviews, avgRating}) => {
+    console.log(avgRating)
     return (
         <div className="reviews">
             <div className="reviews-content">
-                <h3>Reviews stars average rating</h3>
+                { avgRating !== 0 ? 
+                    (<span className='rating-span'>
+                        <Rating className="reviews-rating" value={avgRating} precision={0.1} readOnly /><span><span className='rating-num'>{Math.round(avgRating*10) /10}</span> / 5.0</span>
+                    </span>) : 
+                    (<Rating className="reviews-rating" value={0} precision={0.1} readOnly />)
+                }
                 <h3>Reviews</h3>
                 <div className='reviews-div'>
                     {reviews?.length !== 0 ? (

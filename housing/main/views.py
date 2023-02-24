@@ -1,6 +1,7 @@
 # django
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # rest framework
 from rest_framework import status
@@ -13,7 +14,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework import views, status
 
 from .serializers import UserSerializer, HomeSerializer, ReservationSerializer
-from .models import Landlord
+from .models import Landlord, Home
+
+from json import JSONDecodeError
 
 class HomeView(APIView):
 
@@ -53,12 +56,8 @@ class SignUpView(APIView):
         landlord = Landlord(user = user, is_landlord = is_landlord)
         landlord.save()
 
-
-
         token = Token.objects.create(user=user)
         return Response({'token': token.key})
-
-
 
 
 # Model views from here
@@ -90,71 +89,24 @@ class UserAPIView(views.APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+            return Response({"result": "error","message": "Json decoding error"}, status= 400)
 
+class HomeAPIView(APIView):
 
+    def get(self, request, *args, **kwargs):
+        homes = Home.objects.all()
 
+        if 'location' in request.data:
+            homes = homes.filter(Q(state__icontains=request.data['location']) | Q(city__icontains=request.data['location']) | Q(address__icontains=request.data['location']))
 
-# class LandlordAPIView(views.APIView):
-#     """
-#     A simple APIView for creating Landlord entires.
-#     """
-#     serializer_class = LandlordSerializer
+        if 'price' in request.data:
+            homes = homes.filter(current_price_month__lte=request.data['price'])
 
-#     def get_serializer_context(self):
-#         return {
-#             'request': self.request,
-#             'format': self.format_kwarg,
-#             'view': self
-#         }
+        if 'move_in_date' in request.data:
+            homes = homes.filter(move_in_date__month=request.data['move_in_date'])
 
-#     def get_serializer(self, *args, **kwargs):
-#         kwargs['context'] = self.get_serializer_context()
-#         return self.serializer_class(*args, **kwargs)
-
-#     def post(self, request):
-#         try:
-#             data = JSONParser().parse(request)
-#             serializer = LandlordSerializer(data=data)
-#             if serializer.is_valid(raise_exception=True):
-#                 serializer.save()
-#                 return Response(serializer.data)
-#             else:
-#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#         except JSONDecodeError:
-#             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
-
-
-class HomeAPIView(views.APIView):
-    """
-    A simple APIView for creating Home entires.
-    """
-    serializer_class = HomeSerializer
-
-    def get_serializer_context(self):
-        return {
-            'request': self.request,
-            'format': self.format_kwarg,
-            'view': self
-        }
-
-    def get_serializer(self, *args, **kwargs):
-        kwargs['context'] = self.get_serializer_context()
-        return self.serializer_class(*args, **kwargs)
-
-    def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = HomeSerializer(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
+        serializer = HomeSerializer(homes, many=True)
+        return Response(serializer.data)
 
 
 class ReservationAPIView(views.APIView):
@@ -184,4 +136,4 @@ class ReservationAPIView(views.APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+            return Response({"result": "error","message": "Json decoding error"}, status= 400)

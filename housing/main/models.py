@@ -40,9 +40,7 @@ from django.contrib.auth.models import User
 #         return f'{self.title}'
 
 class Landlord(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='is_landlord')
     is_landlord = models.BooleanField(default=False)
 
     def __str__(self):
@@ -51,17 +49,19 @@ class Landlord(models.Model):
 
 class Home(models.Model):
 
-    landlord = models.ForeignKey(User, null=True, related_name='lanlord', on_delete=models.CASCADE)
+    landlord = models.ForeignKey(User, related_name='lanlord', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=30)
     address = models.CharField(max_length=150)
     zipcode = models.IntegerField()
-    location_lat = models.FloatField()
-    location_lon = models.FloatField()
+    location_lat = models.FloatField(blank=True, null=True)
+    location_lon = models.FloatField(blank=True, null=True)
 #    photo = models.ImageField(storage=RestApiStorage())
-    built_date = models.DateField()
+    built_date = models.DateField(blank=True, null=True)
+    move_in_date = models.DateField()
     area_sqft = models.IntegerField()
     num_bedrooms = models.IntegerField()
     num_bathrooms = models.IntegerField()
@@ -71,7 +71,6 @@ class Home(models.Model):
     is_booked = models.BooleanField(default=False) 
     num_views = models.IntegerField(default=0)
     num_saves = models.IntegerField(default=0)
-#    metadata = JSONField(null=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -90,7 +89,6 @@ class Reservation(models.Model):
     landlord_comments = models.CharField(max_length=1000)
     user_score = models.IntegerField()
     landlord_score = models.IntegerField()
-#    metadata = JSONField(null=True)
 
     def __str__(self):
         return f'{self.title}'

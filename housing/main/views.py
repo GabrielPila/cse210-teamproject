@@ -97,7 +97,11 @@ class HomeAPIView(APIView):
         homes = Home.objects.all()
 
         if 'location' in request.data:
-            homes = homes.filter(Q(state__icontains=request.data['location']) | Q(city__icontains=request.data['location']) | Q(address__icontains=request.data['location']))
+            homes = homes.filter(
+                    Q(state__icontains=request.data['location']) | 
+                    Q(city__icontains=request.data['location']) | 
+                    Q(address__icontains=request.data['location'])
+                )
 
         if 'price' in request.data:
             homes = homes.filter(current_price_month__lte=request.data['price'])

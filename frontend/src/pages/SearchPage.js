@@ -4,8 +4,15 @@ import Dropdown_Price from "../components/Dropdown_Price.js";
 import Dropdown_MoveIn from "../components/Dropdown_MoveIn.js";
 import search_page from "../pics/search-page.png";
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 
 function Search() {
+  const navigate = useNavigate();
+
+  const navigateToList = () => {
+    navigate('/list');
+  };
+
   const [selected, setSelected] = useState("");
   return (
     <div className="Auth-form-container">
@@ -21,7 +28,7 @@ function Search() {
             />
             <Dropdown_Price selected={selected} setSelected={setSelected} />
             <Dropdown_MoveIn selected={selected} setSelected={setSelected} />
-            <button type="Search" className="search-button">
+            <button type="Search" className="search-button" onClick={navigateToList}>
                 <a >Search</a>
             </button>
           </div>

@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# frontend
+REAL_BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders', # frontend
 ]
 
 REST_FRAMEWORK = {
@@ -47,7 +51,20 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    # frontend - axios 
+    'DEFAULT_PERMISSION_CLSAASES':[
+        'rest_framework.permission.AllowAny'
+    ],
+
+    # frontend
+    'DEFAULT_RENDERER_CLASSES': (
+         'rest_framework.renderers.JSONRenderer',
+     )
 }
+
+
+# frontend-axios 
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'# frontend
 ]
 
 ROOT_URLCONF = 'housing.urls'
@@ -64,7 +82,8 @@ ROOT_URLCONF = 'housing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], # add the dirs of our templates 
+        # 'DIRS': [BASE_DIR / 'templates'], # add the dirs of our templates 
+        'DIRS': [os.path.join(REAL_BASE_DIR, 'frontend', 'build')], # frontend
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +146,19 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# frontend
+STATICFILES_DIRS = [os.path.join(REAL_BASE_DIR, 'frontend', 'build', 'static')]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# frontend
+# White listing the localhost:3000 port
+# for React
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)

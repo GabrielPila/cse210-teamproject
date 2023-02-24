@@ -1,6 +1,7 @@
 # django
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.shortcuts import render
 
 # rest framework
 from rest_framework import status
@@ -14,6 +15,12 @@ class HomeView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Hello, World!'})
+
+
+class SearchView(APIView):
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, "index.html")
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
@@ -33,6 +40,7 @@ class SignUpView(APIView):
     def post(self, request, *args, **kwargs):
 
         username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
 
         if User.objects.filter(username=username).exists():
@@ -42,5 +50,6 @@ class SignUpView(APIView):
         user.set_password(password)
         user.save()
 
+
         token = Token.objects.create(user=user)
-        return Response({'token': token.key})
+        return Response({'token': token.key, 'name':username, 'email':email, 'password':password})

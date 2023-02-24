@@ -22,6 +22,13 @@ class SearchView(APIView):
     def get(self, request, *args, **kwargs):
         return render(request, "index.html")
 
+
+class ListView(APIView):
+    def get(self, request, *args, **kwargs):
+        data = {"housename": "regents", "landlord":"nelly"}
+        return Response(data)
+    
+
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
 
@@ -37,6 +44,9 @@ class LoginView(APIView):
         return Response({'token': token.key})
     
 class SignUpView(APIView):
+    # def get(self, request, *args, **kwargs):
+    #     return Response({'name':"lixuechun"})
+
     def post(self, request, *args, **kwargs):
 
         username = request.data.get('username')

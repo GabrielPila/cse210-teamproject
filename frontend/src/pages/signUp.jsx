@@ -1,6 +1,6 @@
 import "../styles/Login.css";
 import LoginNavbar from "../components/LoginNavbar";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Component } from "react";
 import axios from "axios";
 
@@ -11,15 +11,25 @@ class Signup extends Component {
     email: "",
     password: "",
   };
-  
+
+  navigate = useNavigate();
+
+  componentDidMount() {
+    console.log(this.props)
+    if (this.props.user) {
+      const {name, email, password } = this.props.user;
+      this.setState({ name, email, password });
+    }
+  }
+
   // Submit an item
   handleSubmit = (item) => {
     item.preventDefault();
-    // alert("save" + JSON.stringify(item));
+    alert("save" + JSON.stringify(item));
     // if new post to submit
       axios
-        .get("/signup/")
-        .then((res) => this.props.resetState())
+        .post("/signup", this.state)
+        .then((res) => {this.props.resetState(); this.navigate('/search');})
         .catch((err) => console.log(err));
     };
 

@@ -51,12 +51,20 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    # frontend - axios 
+    'DEFAULT_PERMISSION_CLSAASES':[
+        'rest_framework.permission.AllowAny'
+    ],
 
     # frontend
     'DEFAULT_RENDERER_CLASSES': (
          'rest_framework.renderers.JSONRenderer',
      )
 }
+
+
+# frontend-axios 
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

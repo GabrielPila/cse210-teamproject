@@ -11,10 +11,6 @@ const routes = [
           element: <App />,
         },
         {
-          path: "/hello",
-          element: <h1>Hello</h1>,
-        },
-        {
             path: "/reviewPage",
             element: <ReviewPage />,
         },

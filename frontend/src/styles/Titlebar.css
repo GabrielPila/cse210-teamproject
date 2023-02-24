@@ -14,14 +14,26 @@
 .back-button{
     display: inline;
     margin-right: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid black;
+    border-radius: 1.5rem ;
+    border: 1px solid black ;
+    background-color: #F9F0D9 ;
+    color: black;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #F9F0D9;
+    cursor: pointer;
 }
 
 .title {
     color: #255849;
     font-size: 1.8rem;
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 1rem;
+    }
+
+    .back-button{
+        margin-right: 1rem;
+    }
 }

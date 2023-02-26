@@ -1,0 +1,60 @@
+.listing-page {
+    /* align-items: center; */
+    background-color: #faf7ef;
+    border: 1px none;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
+}
+
+.list-title {
+    position: absolute;
+    width: 989px;
+    height: 48px;
+    left: 60px;
+    top: 45px;
+
+    font-family: 'Abhaya Libre';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 120%;
+    /* identical to box height, or 48px */
+
+
+    color: #255849;
+}
+
+.list-more-info {
+    box-sizing: border-box !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: 85%;
+    margin-bottom: 1%;
+    height: 10%;
+}
+
+.list-grid-container {
+    height: 15%;
+    margin-top: 2rem !important;
+    border-radius: 10px;
+    background-color: #F1EDE3 !important;
+
+}
+
+
+.list-grid-item-1 {
+    padding: 0 !important;
+    height: 50%;
+}
+
+.list-grid-item-2 {
+    padding: 0 !important;
+    height: 50%;
+
+}
+

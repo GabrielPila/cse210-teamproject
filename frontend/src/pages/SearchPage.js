@@ -1,5 +1,5 @@
 import "../styles/SearchPage.css";
-import SearchNavbar from "../components/SearchNavbar";
+import Navbar from "../components/Navbar";
 import Dropdown_Price from "../components/Dropdown_Price.js";
 import Dropdown_MoveIn from "../components/Dropdown_MoveIn.js";
 import search_page from "../pics/search-page.png";
@@ -18,7 +18,7 @@ function Search() {
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
-          <SearchNavbar />
+          <Navbar />
           <h3 className="Find-home-with-san-diego-safari">Find Your Home with San Diego Housing Safari</h3>
           <div className="search-forms">
             <input

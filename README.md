@@ -20,5 +20,20 @@ First in /frontend folder, run `npm run build` to create static files, and then 
 * run `python manage.py runserver` in the housing dir, and then visit http://127.0.0.1:8000/log-in, http://127.0.0.1:8000/signup to see the current pages. 
 
 ### API
-1) login/
+* login/
+
 Send 'username' and 'password' in body. Returns token if user is valid else HTTP_404_NOT_FOUND - "User not found"
+
+* signup/
+
+Send 'username', 'password', 'email' and 'is_landlord' in body. Returns token is username does not exists else HTTP_400_BAD_REQUEST - "User already exists"
+
+* get-token/
+
+Send 'username' and 'password' in body. Returns token
+
+* listings/
+
+Returns a list of apartments. 
+
+

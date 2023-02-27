@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Home, Reservation, Landlord
 
-# Register your models here.
+admin.site.register(Home)
+admin.site.register(Landlord)
+admin.site.register(Reservation)

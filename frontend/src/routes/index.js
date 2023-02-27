@@ -4,7 +4,10 @@ import SingleListingPage from '../pages/SingleListingPage.js';
 import Login from '../pages/Login.js';
 import SearchPage from '../pages/SearchPage.js';
 import Signup from '../pages/Signup.js';
+import ListingPage from '../pages/Listing.js';
 
+
+// the path should be same with django urls so that they can be rendered 
 const routes = [
         {
           path: "/",
@@ -29,7 +32,11 @@ const routes = [
         {
           path: "/search",
           element: <SearchPage />,
-        }
+        },
+        {
+          path: "/list",
+          element: <ListingPage />,
+      },
 ];
 
 export default routes;

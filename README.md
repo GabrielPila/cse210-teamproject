@@ -34,5 +34,5 @@ Send 'username' and 'password' in body. Returns token
 
 * listings/
 
-Returns a list of apartments. Send 'location' field in body if one wants to filter the apartments by location, 'price' if filter by price and 'move_in_date' if wants to filter by month.
+Returns a list of apartments. Send 'location' field in body if one wants to filter the apartments by location, 'price' if filter by price and 'move_in_date' if filter by month.
 

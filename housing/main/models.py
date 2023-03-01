@@ -49,7 +49,7 @@ class Landlord(models.Model):
 
 class Home(models.Model):
 
-    landlord = models.ForeignKey(User, related_name='lanlord', on_delete=models.CASCADE)
+    landlord = models.ForeignKey(User, related_name='landlord', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)

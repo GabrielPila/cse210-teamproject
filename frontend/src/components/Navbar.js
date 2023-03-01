@@ -16,6 +16,11 @@ export default function Navbar() {
     navigate('/login');
   };
 
+  const navigateToRegister = () => {
+    navigate('/signup');
+  };
+
+
   // const navigateToSignup = () => {
   //   navigate('/signup');
   // };
@@ -29,8 +34,11 @@ export default function Navbar() {
                 <RoofingIcon className="roof-icon"/>
                 210 Team 4
             </Typography>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={navigateToRegister}>
+                Register
+            </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={navigateToLogIn}>
-                Home
+                Login
             </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={navigateToLogIn}>
                 Logout

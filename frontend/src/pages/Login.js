@@ -1,56 +1,184 @@
 import "../styles/Login.css";
 import LoginNavbar from "../components/LoginNavbar";
-import {useNavigate} from 'react-router-dom'
+// import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { Navigate, Link } from "react-router-dom";
 
-function Login() {
-  const navigate = useNavigate();
+const Login = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const [accountAuthenticated, setAuthenticated] = useState(false);
+  const { username, password } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const navigateToSearch = () => {
-    navigate('/search');
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    // login 
+    const body = JSON.stringify({ username, password });
+    const config = {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios.post("http://localhost:8000/login/", body, config)
+    .then((res) => {
+      console.log("res", res);
+      if (res.data.error) {
+        // send some alert: "mismatch username or password"
+        console.log("error", res.data.error);
+      } else{
+        setAuthenticated(true);
+      }
+    })
+    .catch((error) => {
+      if (error.response) {
+        // send some alert: "mismatch username or password"
+        console.log("error.response.status", error.response.status);
+        console.log(error.response.headers);
+      }
+    });
+
+    // const result = login(username, password);
+    // console.log("result", result)
+    // if (result) {
+    //   setAuthenticated(true);
+    // }
+    // else{
+    //   // send some alert: "mismatch username or password"
+    // }
   };
+  if (accountAuthenticated) {
+    return <Navigate to="/search/" />;
+  }
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
+      <form className="Auth-form" onSubmit={(e) => onSubmit(e)}>
         <div className="Auth-form-content">
-          {/* <div className="top-bar">
-            <div className="form-210team4">
-              <label>210 Team4</label>
-            </div>
-            <div className="form-home">
-              <label>Home</label>
-            </div>
-            
-          </div> */}
           <LoginNavbar />
-          <h3 className="Welcome-to-housing">Welcome to Housing Safari in San Diego</h3>
+          <h3 className="Welcome-to-housing">
+            Welcome to Housing Safari in San Diego
+          </h3>
+
           <div className="form-email">
-            <label>Email</label>
+            <label>Username</label>
             <input
-              type="email"
-              className="placeholder"
+              type="text"
+              className="placeholder "
               placeholder="Enter your user name..."
+              name="username"
+              onChange={(e) => onChange(e)}
+              value={username}
+              required
             />
           </div>
           <div className="form-password">
-            <label>Password</label>
+            <label >Password</label>
             <input
               type="password"
               className="placeholder"
-              placeholder="Enter password..."
+              placeholder="Enter your password..."
+              name="password"
+              onChange={(e) => onChange(e)}
+              value={password}
+              required
+              minLength="6"
             />
           </div>
-          <button type="Login" className="login-button" onClick={navigateToSearch}>
-            <a >Log In</a>
+          <button type="Login submit" className="login-button">
+            Login
           </button>
-          <p className="forgot-password">
-            {/* <a href="#">Forgot your password?</a> */}
-            <a >Forgot your password?</a>
-          </p>
         </div>
       </form>
     </div>
   );
-}
+};
+
+// function Signup() {
+//   const navigate = useNavigate();
+
+//   const navigateToSearch = () => {
+//     navigate('/search');
+//   };
+
+//   return (
+//     <div className="Auth-form-container">
+//       <form className="Auth-form">
+//         <div className="Auth-form-content">
+//           <LoginNavbar />
+//           <h3 className="Welcome-to-housing">Welcome to Housing Safari in San Diego</h3>
+//           <div className="form-email">
+//             <label>Email</label>
+//             <input
+//               type="email"
+//               className="placeholder"
+//               placeholder="Enter your user name..."
+//             />
+//           </div>
+//           <div className="form-password">
+//             <label>Password</label>
+//             <input
+//               type="password"
+//               className="placeholder"
+//               placeholder="Enter password..."
+//             />
+//           </div>
+//           <button type="Login" className="login-button" onClick={navigateToSearch}>
+//             <a >Sign Up</a>
+//           </button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }
+
+// function Login() {
+//   const navigate = useNavigate();
+
+//   const navigateToSearch = () => {
+//     navigate('/search');
+//   };
+
+//   return (
+//     <div className="Auth-form-container">
+//       <form className="Auth-form">
+//         <div className="Auth-form-content">
+//           <LoginNavbar />
+//           <h3 className="Welcome-to-housing">Welcome to Housing Safari in San Diego</h3>
+//           <div className="form-email">
+//             <label>Email</label>
+//             <input
+//               type="email"
+//               className="placeholder"
+//               placeholder="Enter your user name..."
+//             />
+//           </div>
+//           <div className="form-password">
+//             <label>Password</label>
+//             <input
+//               type="password"
+//               className="placeholder"
+//               placeholder="Enter password..."
+//             />
+//           </div>
+//           <button type="Login" className="login-button" onClick={navigateToSearch}>
+//             <a >Log In</a>
+//           </button>
+//           <p className="forgot-password">
+//             {/* <a href="#">Forgot your password?</a> */}
+//             {/* <a >Forgot your password?</a> */}
+//           </p>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// }
 
 export default Login;

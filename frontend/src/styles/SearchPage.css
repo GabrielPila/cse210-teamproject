@@ -1,31 +1,13 @@
-.Auth-form-container {
-    display: flex;
-    justify-content: center;
+.search-Auth-form-container {
     align-items: center;
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    background-color:#faf7ef;
-  }
-  
-  .Auth-form {
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-  }
-  
-  .Auth-form-content {
-    /* padding-left: 12%; */
-    /* padding-right: 12%; */
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
+    background-color: #faf7ef;
+    border: 1px none;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
   }
   
   .Find-home-with-san-diego-safari {
@@ -33,14 +15,14 @@
     /* Find Your Home with San Diego Housing Safari */
 
     position: absolute;
-    height: 16.5vh;
-    margin-top: 5%;
+    height: 10%;
+    padding-bottom: 0%;
 
     font-family: 'Abhaya Libre';
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
-    line-height: 120%;
+    line-height: 50%;
     /* or 77px */
 
     text-align: center;
@@ -52,18 +34,17 @@
 
   .search-forms {
     position: absolute;
-    width: 80%;
-    height: 10vh !important;
-    margin-left: 0%;
-    margin-top: 15%;
-    /* border: 1px solid red; */
+    width: 60%;
+    height: 10%;
+    padding-left: 2%;
+    padding-top: 2%;
   }
 
   .location-placeholder {
 
     position: absolute;
-    width: 35%;
-    height: 10vh !important;
+    width: 40%;
+    height: 10vh;
     margin-left: 0%;
     margin-top: 0%;
 
@@ -84,7 +65,7 @@
   .price-placeholder {
     position: absolute;
     width: 20%;
-    height: 10vh !important;
+    height: 10vh;
     margin-left: 0%;
     margin-top: 0%;
     border: 1px solid #F1EDE3;
@@ -103,7 +84,7 @@
   .movein-placeholder {
     position: absolute;
     width: 25%;
-    height: 10vh !important;
+    height: 10vh;
     margin-left: 0%;
     margin-top: 0%;
     border: 1px solid #F1EDE3;
@@ -121,10 +102,11 @@
 
   .search-button {
     position: absolute;
-    width: 15%;
-    height: 10vh !important;
-    margin-left: 90%;
-    margin-top: 0%;
+    width: 12%;
+    height: 10vh;
+    padding-left: 0%;
+    padding-top: 0%;
+    margin-top: 2%;
 
     background: #255849;
     border-radius: 40px;
@@ -133,7 +115,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
-    line-height: 120%;
+    line-height: 60%;
     /* identical to box height, or 48px */
 
     text-align: center;
@@ -141,10 +123,30 @@
     color: #FFFFFF;
   }
 
-  .search_pic {
-    /* position: absolute; */
-    margin-left: -20%;
-    width: 80%;
-    height: 15vh !important;
-    margin-top: 25%;
-  }
+
+.search-grid-container {
+    height: 80%;
+    margin-top: 2rem !important;
+    border-radius: 10px;
+    background-color: #faf7ef !important;
+}
+
+.search-grid-item-1 {
+    padding: 1.5rem !important;
+    height: 20%;
+}
+
+.search-grid-item-2 {
+    padding: 1.5 rem !important;
+    height: 30%;
+}
+
+.search-grid-item-3 {
+  padding: 1.5 rem !important;
+  height: 30%;
+}
+
+.search-grid-item-4 {
+    padding: 0rem !important;
+    height: 50%;
+}

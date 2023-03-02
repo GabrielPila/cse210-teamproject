@@ -1,34 +1,23 @@
-  .Auth-form-container {
-    display: flex;
-    justify-content: center;
+  .login-page {
+    background-color: #faf7ef;
+    height: 100vh;
+    width: 100%;
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .login-page-container {
     align-items: center;
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    background-color:#faf7ef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
   }
   
-  .Auth-form {
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-  }
-  
-  .Auth-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
-    position: absolute;
-    height: 832px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-  }
-  
-  .Welcome-to-housing {
+  .login-title {
 
     /* Welcome to Housing Safari in San Diego */
 
@@ -49,6 +38,109 @@
 
     color: #255849;
   }
+
+
+  .login-form{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+  .login-username-div{
+    font-family: 'Abel';
+    font-style: normal; 
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+
+  .login-password-div{
+    font-family: 'Abel';
+    font-style: normal; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    
+  } 
+
+  .login-username-div input{
+    font-family: 'Abel';
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.33);
+    padding: 1rem;
+    border: none;
+    background-color: #F1EDE3;
+    font-size: 2rem;
+    display: inline-block;
+  }
+
+
+  .login-password-div input{
+    font-family: 'Abel';
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.33);
+    padding: 1rem;
+    border: none;
+    background-color: #F1EDE3;
+    font-size: 2rem;
+  } 
+
+  .login-username-grid{
+    display: flex;
+  }
+
+  .login-password-grid{
+    display: flex;
+  }
+
+  .label-username{
+    color: #255849;
+    font-size: 3rem;
+    height: 100%;
+    width: 60%;
+    float: right;
+  }
+
+  .label-password{
+    color: #255849;
+    font-size: 3rem;
+    height: 100%;
+    width: 60%;
+    float: right;
+
+  }
+
+  .login-button {
+    width: 10%;
+    background: #255849;
+    border-radius: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 3rem;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   .form-email {
@@ -93,7 +185,6 @@
   }
 
   .form-password {
-    position: absolute;
     width: 40%;
     height: 25vh !important;
     margin-top: 90px;
@@ -109,31 +200,11 @@
 
   }
 
-  .login-button {
-    position: absolute;
-    width: 12%;
-    height: 10vh !important;
-    margin-top: 20%;
-    margin-left: 30%;
-
-    background: #255849;
-    border-radius: 40px;
-    
-    font-family: 'Abel';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
-    line-height: 120%;
-    
-    text-align: center;
-    
-    color: #FFFFFF;
-  }
+  
 
   .forgot-password {
     align-content: center;
     justify-content: center;
-    position: absolute;
     width: 100%;
     margin-left: 30%;
     margin-top: 17%;

@@ -1,0 +1,29 @@
+.list-more-info {
+    box-sizing: border-box !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: 85%;
+    margin-bottom: 1%;
+    height: 10%;
+}
+
+.list-grid-container {
+    height: 15%;
+    margin-top: 2rem !important;
+    border-radius: 10px;
+    background-color: #F1EDE3 !important;
+
+}
+
+
+.list-grid-item-1 {
+    padding: 0 !important;
+    height: 50%;
+}
+
+.list-grid-item-2 {
+    padding: 0 !important;
+    height: 50%;
+
+}

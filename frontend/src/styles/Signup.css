@@ -1,3 +1,161 @@
+.signup-page {
+  background-color: #faf7ef;
+  height: 100vh;
+  width: 100%;
+  padding-right: 4rem !important;
+  padding-left: 4rem !important;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.signup-page-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.signup-title {
+
+  /* Welcome to Housing Safari in San Diego */
+
+  /* position: absolute; */
+  width: 100%;
+  height: 25vh !important;
+  /* left: 120px; */
+  top: 5vh !important;
+
+  font-family: 'Abhaya Libre';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12vh;
+  line-height: 120%;
+  /* or 101px */
+
+  text-align: center;
+
+  color: #255849;
+}
+
+
+.signup-form{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.signup-username-div{
+  font-family: 'Abel';
+  font-style: normal; 
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+
+.signup-password-div{
+  font-family: 'Abel';
+  font-style: normal; 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  
+} 
+
+.signup-username-div input{
+  font-family: 'Abel';
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.33);
+  padding: 1rem;
+  border: none;
+  background-color: #F1EDE3;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+
+.signup-password-div input{
+  font-family: 'Abel';
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.33);
+  padding: 1rem;
+  border: none;
+  background-color: #F1EDE3;
+  font-size: 2rem;
+} 
+
+.signup-username-grid{
+  display: flex;
+}
+
+.signup-password-grid{
+  display: flex;
+}
+
+.label-username{
+  color: #255849;
+  font-size: 3rem;
+  height: 100%;
+  width: 60%;
+  float: right;
+}
+
+.label-password{
+  color: #255849;
+  font-size: 3rem;
+  height: 100%;
+  width: 60%;
+  float: right;
+
+}
+
+.signup-button {
+  width: 10%;
+  background: #255849;
+  border-radius: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*                      */
+
+
+
+
+
   .Auth-form-container {
     display: flex;
     justify-content: center;
@@ -128,7 +286,7 @@
 
   }
 
-  .login-button {
+  /* .login-button {
     position: absolute;
     width: 12%;
     height: 10vh !important;
@@ -147,7 +305,7 @@
     text-align: center;
     
     color: #FFFFFF;
-  }
+  } */
 
   .forgot-password {
     align-content: center;

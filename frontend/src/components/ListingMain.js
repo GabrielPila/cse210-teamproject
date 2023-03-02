@@ -1,8 +1,9 @@
 import "../styles/ListingMain.css"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-const ListingMain = ({price, bedroom, bathroom, date, features}) => {
-
+const ListingMain = ({price, bedroom, bathroom}) => {
+    const date =  "June 1st 2023";
+    const features =  ["oven", "bathroom", "kitchen"];
     return (
         <div className="listingMain">
             <div className="listingMain-content">

@@ -1,5 +1,6 @@
 import { Container, Grid} from '@mui/material';
 import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import Navbar from "../components/Navbar"
 import Titlebar from "../components/Titlebar";
 import LandlordInfo from '../components/LandlordInfo';
@@ -10,30 +11,21 @@ import SingleListingImageGallery from '../components/SingleListingImageGallery';
 
 
 const SingleListingPage = () => {
+    const {state} = useLocation();
     // need title, images, mainListingInfo, landlordInfo, and reviews from the previous page dont need state on this page
-    const title = "Student Apartment 1..."
-    const images = [
-        {
-          original: 'https://picsum.photos/id/1018/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1018/250/150/',
-        },
-        {
-          original: 'https://picsum.photos/id/1015/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1015/250/150/',
-        },
-        {
-          original: 'https://picsum.photos/id/1019/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-      ];
+    const id = state.id;
+    const images = state.images;
+    const mainInfo = state.mainInfo;
+    const title = `Student Apartment ${id}...`;
+    
+    // const mainInfo = {
+    //     price: 1000,
+    //     bedroom: 1,
+    //     bathroom: 1,
+    //     date: "June 1st 2023",
+    //     features: ["oven", "bathroom", "kitchen"]
+    // };
     const [avgRating, setAvgRating] = useState(0);
-    const mainInfo = {
-        price: 1000,
-        bedroom: 1,
-        bathroom: 1,
-        date: "June 1st 2023",
-        features: ["oven", "bathroom", "kitchen"]
-    };
     const reviews = [
         {   
             id: 1,

@@ -38,6 +38,8 @@
     height: 10%;
     padding-left: 2%;
     padding-top: 2%;
+    display: flex;
+    align-items: center;
   }
 
   .location-placeholder {
@@ -121,6 +123,7 @@
     text-align: center;
 
     color: #FFFFFF;
+    cursor: pointer;
   }
 
 
@@ -134,6 +137,8 @@
 .search-grid-item-1 {
     padding: 1.5rem !important;
     height: 20%;
+    display: flex;
+    justify-content: center;
 }
 
 .search-grid-item-2 {

@@ -13,3 +13,7 @@
 .roof-icon {
     margin-right: 5px;
 }
+
+.navbar-text{
+    cursor: pointer;
+}

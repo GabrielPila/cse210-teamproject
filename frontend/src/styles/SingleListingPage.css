@@ -1,13 +1,19 @@
 .single-listing-page {
-    align-items: center;
     background-color: #faf7ef;
-    border: 1px none;
-    display: flex;
     height: 100vh;
-    flex-direction: column;
     width: 100%;
     padding-right: 4rem !important;
     padding-left: 4rem !important;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.single-listing-page-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .grid-container {
@@ -38,3 +44,7 @@
     height: 50%;
 }
 
+
+@media (max-width: 900px) {
+
+}

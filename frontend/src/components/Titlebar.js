@@ -8,10 +8,10 @@ const Titlebar = ({title}) => {
     ]
     return (
         <div className="title-bar">
-            <div className="back-button" onClick={goBack}>
+            <button className="back-button" onClick={goBack}>
                 <ArrowBackIcon className="arrow-icon"/>
                 <h6 className="back">BACK</h6>
-            </div>
+            </button>
             <span className="title">{title}</span>
         </div>
     )

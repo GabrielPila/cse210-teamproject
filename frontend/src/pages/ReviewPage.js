@@ -13,6 +13,7 @@ const commentData = {
     text4: "😊", 
     text5: "😁"
 }
+
 const ReviewPage = () => {
     const { state } = useLocation();
     const [rating, setRating] = useState(0);
@@ -55,35 +56,38 @@ const ReviewPage = () => {
     }, [rating]);
 
     return (
-        <Container className="review-page" maxWidth={false}>
-            <Navbar />
-            <Titlebar title="Rate Your Stay..."/>
-            <div className="section-1">
-                <div className="sub-title">How do you like your home?</div>
-                <div className="text-container abeezee-normal-black-64px">
-                    <div className="review-icon" name="button-1" data-value="1" onClick={onIconClick}>{text1}</div>
-                    <div className="review-icon" name="button-2" data-value="2" onClick={onIconClick}>{text2}</div>
-                    <div className="review-icon" name="button-3" data-value="3" onClick={onIconClick}>{text3}</div>
-                    <div className="review-icon" name="button-4" data-value="4" onClick={onIconClick}>{text4}</div>
-                    <div className="review-icon" name="button-5" data-value="5" onClick={onIconClick}>{text5}</div>
+        <div className="review-page">
+            <Container className="review-page-container" maxWidth={false}>
+                <Navbar />
+                <Titlebar title="Rate Your Stay..."/>
+                <div className="section-1">
+                    <div className="sub-title">How do you like your home?</div>
+                    <div className="text-container abeezee-normal-black-64px">
+                        <div className="review-icon" name="button-1" data-value="1" onClick={onIconClick}>{text1}</div>
+                        <div className="review-icon" name="button-2" data-value="2" onClick={onIconClick}>{text2}</div>
+                        <div className="review-icon" name="button-3" data-value="3" onClick={onIconClick}>{text3}</div>
+                        <div className="review-icon" name="button-4" data-value="4" onClick={onIconClick}>{text4}</div>
+                        <div className="review-icon" name="button-5" data-value="5" onClick={onIconClick}>{text5}</div>
+                    </div>
                 </div>
-            </div>
-            <div className="section-2">   
-                <div className="review-page-textarea-div">
-                    <textarea
-                        className="review-page-textarea"
-                        value={comment}
-                        placeholder="Share your experience with us......"
-                        onChange={(e) => {
-                            setComment(e.target.value);
-                        }}
-                    />
-                </div>              
-                <div className="reviews-page-button-div">
-                    <Button className="reviews-page-button" variant="contained" onClick={onSubmit}>Submit</Button>
+                <div className="section-2">   
+                    <div className="review-page-textarea-div">
+                        <textarea
+                            className="review-page-textarea"
+                            value={comment}
+                            placeholder="Share your experience with us......"
+                            onChange={(e) => {
+                                setComment(e.target.value);
+                            }}
+                        />
+                        <div className="reviews-page-button-div">
+                            <Button className="reviews-page-button" variant="contained" onClick={onSubmit}>Submit</Button>
+                        </div>
+                    </div>              
+                    
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     )
 }
 

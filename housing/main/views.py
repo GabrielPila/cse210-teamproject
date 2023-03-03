@@ -20,8 +20,11 @@ from .models import Landlord, Home, Comments
 
 from json import JSONDecodeError
 
-class HomeView(APIView):
 
+import logging
+
+
+class HomeView(APIView):
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Hello, World!'})
 
@@ -40,25 +43,21 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
         
         if not user:
-            return Response({'message': "User not found"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': "User not found"}, status=status.HTTP_404_NOT_FOUND)
         
         token = Token.objects.get(user=user)
         return Response({'token': token.key})
     
 class SignUpView(APIView):
-    # def get(self, request, *args, **kwargs):
-    #     return Response({'name':"lixuechun"})
-
     def post(self, request, *args, **kwargs):
 
         username = request.data.get('username')
         email = request.data.get('email')
         password = request.data.get('password')
-        email = request.data.get('email')
         is_landlord = request.data.get('is_landlord', False)
 
         if User.objects.filter(username=username).exists():
-            return Response({'message': "User already exists"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': "User already exists"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User(username=username)
         user.set_password(password)
@@ -67,6 +66,9 @@ class SignUpView(APIView):
 
         landlord = Landlord(user = user, is_landlord = is_landlord)
         landlord.save()
+
+        logger = logging.getLogger('applog')
+        logger.info(user)
 
         token = Token.objects.create(user=user)
         return Response({'token': token.key})
@@ -101,7 +103,7 @@ class UserAPIView(views.APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except JSONDecodeError:
-            return Response({"result": "error","message": "Json decoding error"}, status= 400)
+            return Response({"result": "error","error": "Json decoding error"}, status= 400)
 
 class ListingsAPIView(APIView):
 

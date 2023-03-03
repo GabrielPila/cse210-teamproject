@@ -7,18 +7,27 @@ import Button from '@mui/material/Button';
 import RoofingIcon from '@mui/icons-material/Roofing';
 import MenuIcon from '@mui/icons-material/Menu';
 import "../styles/LoginNavbar.css"
+import {useNavigate} from 'react-router-dom';
+
+
+
+
 
 export default function LoginNavbar() {
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    navigate('/search/');
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className="appbar">
         <Toolbar>
           <div className='appbar-div'>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
                 <RoofingIcon className="roof-icon"/>
                 210 Team 4
             </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={navigateToHome}>
                 Home
             </Typography>
           </div>

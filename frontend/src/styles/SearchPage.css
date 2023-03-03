@@ -45,6 +45,69 @@
   .location-placeholder {
 
     position: absolute;
+    width: 30%;
+    height: 10vh;
+    margin-left: 0%;
+    margin-top: 0%;
+
+    border-color: rgba(70, 168, 138, 0.36);
+    background-color: rgba(70, 168, 138, 0.36);
+    border-radius: 20px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+
+    color: rgba(0, 0, 0, 0.33);
+  }
+
+
+  .price-placeholder {
+
+    position: absolute;
+    width: 30%;
+    height: 10vh;
+    margin-left: 0%;
+    margin-top: 0%;
+
+    border-color: rgba(70, 168, 138, 0.36);
+    background-color: rgba(70, 168, 138, 0.36);
+    border-radius: 20px;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+
+    color: rgba(0, 0, 0, 0.33);
+  }
+
+  /* .price-placeholder {
+    position: absolute;
+    width: 20%;
+    height: 10vh;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 1px solid #F1EDE3;
+    background-color: #F1EDE3;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 120%;
+    padding-left: 15px;
+
+    color: rgba(0, 0, 0, 0.33); 
+  } */
+  .movein-placeholder {
+
+    position: absolute;
     width: 40%;
     height: 10vh;
     margin-left: 0%;
@@ -64,26 +127,7 @@
     color: rgba(0, 0, 0, 0.33);
   }
 
-  .price-placeholder {
-    position: absolute;
-    width: 20%;
-    height: 10vh;
-    margin-left: 0%;
-    margin-top: 0%;
-    border: 1px solid #F1EDE3;
-    background-color: #F1EDE3;
-
-    font-family: 'Abel';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 120%;
-    padding-left: 15px;
-
-    color: rgba(0, 0, 0, 0.33); 
-  }
-
-  .movein-placeholder {
+  /* .movein-placeholder {
     position: absolute;
     width: 25%;
     height: 10vh;
@@ -100,15 +144,17 @@
     padding-left: 15px;
 
     color: rgba(0, 0, 0, 0.33); 
-  }
+  } */
 
   .search-button {
     position: absolute;
-    width: 12%;
+    width: 20%;
     height: 10vh;
     padding-left: 0%;
     padding-top: 0%;
     margin-top: 2%;
+    top: 40px; 
+    left: 900px;
 
     background: #255849;
     border-radius: 40px;
@@ -143,6 +189,7 @@
 
 .search-grid-item-2 {
     padding: 1.5 rem !important;
+    display: flex;
     height: 30%;
 }
 

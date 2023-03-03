@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.db.models import Q
-
+from datetime import datetime
 # rest framework
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
@@ -22,6 +22,7 @@ from json import JSONDecodeError
 
 
 import logging
+logger = logging.getLogger("mylogger")
 
 
 class HomeView(APIView):
@@ -36,6 +37,8 @@ class SearchView(APIView):
     
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
+        logger.info(request.data)
+
 
         username = request.data.get('username')
         password = request.data.get('password')
@@ -111,19 +114,49 @@ class ListingsAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         homes = Home.objects.all()
+        # logger.info(request.data) # []
 
-        if 'location' in request.data:
+        #  extract the params and convert to the correct format 
+        all_params = dict(request.GET)
+        for key, val in all_params.items():
+            all_params[key] = val[0]
+        logger.info(all_params)
+
+        if 'location' in all_params:
+            location = str(all_params['location'])
             homes = homes.filter(
-                    Q(state__icontains=request.data['location']) | 
-                    Q(city__icontains=request.data['location']) | 
-                    Q(address__icontains=request.data['location'])
+                    Q(state__icontains=location) | 
+                    Q(city__icontains=location) | 
+                    Q(address__icontains=location)
                 )
 
-        if 'price' in request.data:
-            homes = homes.filter(current_price_month__lte=request.data['price'])
+        if 'price' in all_params:
+            price = int(all_params['price'])
+            homes = homes.filter(current_price_month__lte=price)
 
-        if 'move_in_date' in request.data:
-            homes = homes.filter(move_in_date__month=request.data['move_in_date'])
+        if 'move_in_date' in all_params: # 'Tue Feb 28 2023'
+            # change the move in date to be lte 
+            dates = all_params['move_in_date'].split()[1:]
+            month_to_num = {
+                'Jan':1,
+                'Feb':2,
+                'Mar':3,
+                'Apr':4,
+                'May':5,
+                'Jun':6,
+                'Jul':7,
+                'Aug':8,
+                'Sep':9,
+                'Oct':10,
+                'Nov':11,
+                'Dec':12
+            }
+            date = dates[-1] + '-' + str(month_to_num[dates[0]]) + '-' + dates[1]
+            logger.info(date)
+    
+            date = datetime.strptime(date, "%Y-%m-%d").date()
+    
+            homes = homes.filter(move_in_date__lte=date)
 
         serializer = HomeSerializer(homes, many=True)
         return Response(serializer.data)

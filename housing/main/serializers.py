@@ -1,22 +1,5 @@
 from . import models
 from rest_framework import serializers
-# from rest_framework.fields import (BooleanField,
-#                                     CharField, 
-#                                     EmailField, 
-#                                     URLField, 
-#                                     UUIDField,
-#                                     IPAddressField,
-#                                     IntegerField,
-#                                     FloatField,
-#                                     DecimalField,
-#                                     DateTimeField,
-#                                     DateField,
-#                                     DurationField,
-#                                     ImageField,
-#                                     JSONField,
-#                                     ModelField,
-#                                     HiddenField
-#                                     )
 
 class UserSerializer(serializers.ModelSerializer):
     
@@ -26,10 +9,26 @@ class UserSerializer(serializers.ModelSerializer):
                   'username', 
                   'email', 
                   'is_landlord')
+        
+class CommentsSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+    
+    class Meta:
+        model = models.Comments
+        fields = (
+            'id',
+            'user',
+            'comment',
+            'rating',
+            'created_at',
+        )
 
 class HomeSerializer(serializers.ModelSerializer):
 
     landlord = UserSerializer()
+    comments_home = serializers.SerializerMethodField()
+    overall_rating = serializers.SerializerMethodField('get_overall_rating')
 
     class Meta:
         model = models.Home
@@ -56,10 +55,21 @@ class HomeSerializer(serializers.ModelSerializer):
             'is_booked',
             'num_views',
             'num_saves',
+            'comments_home',
+            'overall_rating'
 		)
 
-
-
+    def get_comments_home(self, instance):
+        comments = instance.comments_home.all().order_by('-created_at')
+        return CommentsSerializer(comments, many=True).data
+    
+    def get_overall_rating(self, instance):
+        comments = instance.comments_home.all()
+        if comments.count() == 0:
+            return 0
+        else:
+            return round(sum([comment.rating for comment in comments]) / comments.count(), 1)
+        
 class ReservationSerializer(serializers.ModelSerializer):
  
     class Meta:

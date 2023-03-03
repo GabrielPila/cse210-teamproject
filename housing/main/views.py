@@ -5,17 +5,18 @@ from django.shortcuts import render
 from django.db.models import Q
 
 # rest framework
-from rest_framework import status
-from rest_framework import permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework import status
 
 from rest_framework.parsers import JSONParser
 from rest_framework import views, status
 
-from .serializers import UserSerializer, HomeSerializer, ReservationSerializer
-from .models import Landlord, Home
+from .serializers import UserSerializer, HomeSerializer, ReservationSerializer, CommentsSerializer
+from .models import Landlord, Home, Comments
 
 from json import JSONDecodeError
 
@@ -30,7 +31,6 @@ class SearchView(APIView):
     def get(self, request, *args, **kwargs):
         return render(request, "index.html")
     
-
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
 
@@ -105,6 +105,8 @@ class UserAPIView(views.APIView):
 
 class ListingsAPIView(APIView):
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         homes = Home.objects.all()
 
@@ -124,32 +126,55 @@ class ListingsAPIView(APIView):
         serializer = HomeSerializer(homes, many=True)
         return Response(serializer.data)
 
+class HomeAPIView(views.APIView):
 
-class ReservationAPIView(views.APIView):
-    """
-    A simple APIView for creating Reservation entires.
-    """
-    serializer_class = ReservationSerializer
+    permission_classes = [IsAuthenticated]
 
-    def get_serializer_context(self):
-        return {
-            'request': self.request,
-            'format': self.format_kwarg,
-            'view': self
-        }
+    def get(self, request, *args, **kwargs):
+        home = Home.objects.get(id=kwargs['pk'])
+        home_serializer = HomeSerializer(home)
 
-    def get_serializer(self, *args, **kwargs):
-        kwargs['context'] = self.get_serializer_context()
-        return self.serializer_class(*args, **kwargs)
+        return Response(home_serializer.data)
 
-    def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = ReservationSerializer(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return Response({"result": "error","message": "Json decoding error"}, status= 400)
+class CommentsAPIView(views.APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        home = Home.objects.get(id=kwargs['pk'])
+        user = request.user
+        comment = request.data.get('comment')
+        rating = request.data.get('rating')
+
+        comment = Comments(home=home, user=user, comment=comment, rating=rating)
+        comment.save()
+
+        return Response({'message': 'Comment added successfully'})
+
+# class ReservationAPIView(views.APIView):
+#     """
+#     A simple APIView for creating Reservation entires.
+#     """
+#     serializer_class = ReservationSerializer
+
+#     def get_serializer_context(self):
+#         return {
+#             'request': self.request,
+#             'format': self.format_kwarg,
+#             'view': self
+#         }
+
+#     def get_serializer(self, *args, **kwargs):
+#         kwargs['context'] = self.get_serializer_context()
+#         return self.serializer_class(*args, **kwargs)
+
+#     def post(self, request):
+#         try:
+#             data = JSONParser().parse(request)
+#             serializer = ReservationSerializer(data=data)
+#             if serializer.is_valid(raise_exception=True):
+#                 serializer.save()
+#                 return Response(serializer.data)
+#             else:
+#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         except JSONDecodeError:
+#             return Response({"result": "error","message": "Json decoding error"}, status= 400)

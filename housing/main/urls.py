@@ -14,4 +14,6 @@ urlpatterns = [
 
     # pages
     path('listings/', ListingsAPIView.as_view()),
+    path('listings/<int:pk>/', HomeAPIView.as_view()),
+    path('comments/<int:pk>/', CommentsAPIView.as_view()),
 ]

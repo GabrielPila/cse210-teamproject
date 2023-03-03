@@ -1,43 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from rest_models.storage import RestApiStorage
-#from rest_models.backend.utils import JSONField
-# Create your models here.
-
-# class User(models.Model):
-
-#     user_id = models.CharField(max_length=15)
-#     username = models.CharField(max_length=20)
-#     first_name = models.CharField(max_length=135)
-#     last_name = models.CharField(max_length=135)
-#     email = models.EmailField(verbose_name="Email")
-# #    photo = models.ImageField(storage=RestApiStorage())
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     last_login = models.DateTimeField()
-#     birthdate = models.DateTimeField()
-#     rating = models.IntegerField()
-# #    metadata = JSONField(null=True)
-    
-#     def __str__(self):
-#         return f'{self.title}'
-
-
-# class Landlord(models.Model):
-
-#     lanlord_id = models.IntegerField()
-#     username = models.CharField(max_length=20)
-#     first_name = models.CharField(max_length=135)
-#     last_name = models.CharField(max_length=135)
-#     email = models.EmailField(verbose_name="Email")
-# #    photo = models.ImageField(storage=RestApiStorage())
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     last_login = models.DateTimeField()
-#     birthdate = models.DateTimeField()
-#     rating = models.IntegerField()
-# #    metadata = JSONField(null=True)
-
-#     def __str__(self):
-#         return f'{self.title}'
 
 class Landlord(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='is_landlord')
@@ -45,7 +7,6 @@ class Landlord(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
-
 
 class Home(models.Model):
 
@@ -75,6 +36,16 @@ class Home(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+class Comments(models.Model):
+
+    user = models.ForeignKey(User, related_name='comments_user', on_delete=models.CASCADE)
+    home = models.ForeignKey(Home, related_name='comments_home', on_delete=models.CASCADE)
+    comment = models.CharField(max_length=1000, blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.id} - {self.home.id}'
 
 class Reservation(models.Model):
     # Think in another name (just to show interest)

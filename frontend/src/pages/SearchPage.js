@@ -1,17 +1,36 @@
-
 import { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Grid, Select} from '@mui/material';
+import { Container, Grid, Select } from "@mui/material";
 import Navbar from "../components/Navbar";
-import Dropdown_Price from "../components/Dropdown_Price.js";
-import Dropdown_MoveIn from "../components/Dropdown_MoveIn.js";
+// import Dropdown_Price from "../components/Dropdown_Price.js";
+// import Dropdown_MoveIn from "../components/Dropdown_MoveIn.js";
 import search_page from "../pics/search-page.png";
 import "../styles/SearchPage.css";
+import "bootstrap/dist/css/bootstrap.css";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 
 function Search() {
+  // add token to the reqs
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Token ${localStorage.getItem("token")}`;
+
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [formData, setFormData] = useState({
+    location: "",
+    price: null,
+    moveInDate: "",
+  });
+  const [pageSearched, setSearched] = useState(false);
+  const { location, price, moveInDate } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const images = [
     {
       original: "https://picsum.photos/id/1018/1000/600/",
@@ -22,14 +41,41 @@ function Search() {
       thumbnail: "https://picsum.photos/id/1019/250/150/",
     },
   ];
-  
-  const search = () => {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      location: location,
+      price: parseInt(price),
+      move_in_date: Date.parse(moveInDate),
+    };
+
+    const priceInt = parseInt(price);
+    let param = {};
+    if (location != "") {
+      param["location"] = location;
+    }
+    if (price != null) {
+      param["price"] = priceInt;
+    }
+    if (startDate != null) {
+      param["move_in_date"] = startDate.toDateString(); // 'Tue Feb 28 2023'
+    }
+
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      params: param,
+    };
+
     axios
-      .get("http://localhost:8000/listings/")
+      .get("http://localhost:8000/listings/", config)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         const data = res.data;
-        const listings = data.map(listing => {
+        const listings = data.map((listing) => {
           return {
             id: listing.id,
             mainInfo: {
@@ -41,61 +87,84 @@ function Search() {
               number: 123456,
             },
             images: images,
-          }
+          };
         });
+        setSearched(true);
         navigate("/list", {
           state: {
-            listings
-          }
+            listings,
+          },
         });
-      }).catch(e => console.log(e));
-  }
- 
-  const [data, setData] = useState({
-    location: "",
-    price: "",
-    date: ""
-  })
+      })
+      .catch((e) => console.log(e));
+  };
 
-  const [selected, setSelected] = useState("");
-
-  useEffect(()=> {
-    if(localStorage.getItem("token") === "") {
-      navigate("/login")
+  useEffect(() => {
+    if (localStorage.getItem("token") === "") {
+      navigate("/login");
     }
-  }, [])
+  }, []);
+
+  if (pageSearched) {
+    return <Navigate to="/list/" />;
+  }
+
   return (
     <Container className="search-Auth-form-container" maxWidth={false}>
-        <Navbar />
-        <Grid container spacing={1} className="search-grid-container">
-            <Grid item xs={12} className="search-grid-item-1">
-              <div className="Find-home-with-san-diego-safari">Find Your Home with San Diego Housing Safari</div>
-            </Grid>
-            <Grid item xs={10} className="search-grid-item-2">
-                <div className="search-forms">
-                <input
-                  type="location"
-                  className="location-placeholder"
-                  placeholder="search by location"
-                />
-                {/* <select>
-
-                </select> */}
-                <Dropdown_Price selected={selected} setSelected={setSelected} />
-                <Dropdown_MoveIn selected={selected} setSelected={setSelected} />
-              </div>
-            </Grid>
-            <Grid item xs={2} className="search-grid-item-3">
-              <button type="Search" className="search-button" onClick={search}>
-                  <a >Search</a>
-              </button>
-            </Grid>
-            <Grid item xs={12} className="search-grid-item-4">
-                <div>
-                 <img src={search_page} style={{ width: "100%", height: "280px"}} />
-               </div>
-            </Grid>
+      <Navbar />
+      <Grid container spacing={1} className="search-grid-container">
+        <Grid item xs={12} className="search-grid-item-1">
+          <div className="Find-home-with-san-diego-safari">
+            Find Your Home with San Diego Housing Safari
+          </div>
         </Grid>
+
+        <Grid item xs={14} className="search-grid-item-2">
+          <form className="search-forms" onSubmit={(e) => onSubmit(e)}>
+            <div className="col  form-group ">
+              <input
+                name="location"
+                type="location"
+                onChange={(e) => onChange(e)}
+                value={location}
+                className="location-placeholder"
+                placeholder="search by location"
+              />
+            </div>
+            <div className="col  form-group ">
+              <input
+                name="price"
+                type="price"
+                value={price}
+                onChange={(e) => onChange(e)}
+                className="price-placeholder"
+                placeholder="type your price"
+              />
+            </div>
+
+            <div className="col form-group pickdate ">
+              <p>select your move in date</p>
+
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+            <button
+              type="Search submit"
+              className="search-button movein-placeholder"
+            >
+              <a>Search</a>
+            </button>
+          </form>
+        </Grid>
+
+        <Grid item xs={12} className="search-grid-item-4">
+          <div>
+            <img src={search_page} style={{ width: "100%", height: "280px" }} />
+          </div>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

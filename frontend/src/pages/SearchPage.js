@@ -100,9 +100,9 @@ function Search() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token") === "") {
-      navigate("/login");
-    }
+    // if (localStorage.getItem("token") === "") {
+    //   navigate("/login");
+    // }
   }, []);
 
   if (pageSearched) {
@@ -142,20 +142,25 @@ function Search() {
               />
             </div>
 
-            <div className="col form-group pickdate ">
-              <p>select your move in date</p>
+            <div className="col  form-group ">
+              <div className="pickdate-form">
+                <p>select your move in date</p>
 
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
             </div>
-            <button
-              type="Search submit"
-              className="search-button movein-placeholder"
-            >
-              <a>Search</a>
-            </button>
+
+            <div className="col  form-group ">
+              <button
+                type="Search submit"
+                className="search-button"
+              >
+                <a>Search</a>
+              </button>
+            </div>
           </form>
         </Grid>
 

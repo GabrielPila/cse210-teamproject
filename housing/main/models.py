@@ -20,7 +20,7 @@ class Home(models.Model):
     zipcode = models.IntegerField()
     location_lat = models.FloatField(blank=True, null=True)
     location_lon = models.FloatField(blank=True, null=True)
-#    photo = models.ImageField(storage=RestApiStorage())
+    photos = models.JSONField()
     built_date = models.DateField(blank=True, null=True)
     move_in_date = models.DateField()
     area_sqft = models.IntegerField()

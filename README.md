@@ -35,19 +35,21 @@ Send 'username' and 'password' in body. Returns token
 **AUTHORIZATION is required for every page.**
 
 To access any data once the user logs in, token should be sent in the header to authorize user.
-Example - Under headers - {'Authorization': 'Token be5c928adcd39348c6c12defb037062496a707b3'}
+Example - Under headers pass the token as - {'Authorization': 'Token be5c928adcd39348c6c12defb037062496a707b3'}
 
 * listings/
 
 Returns a list of apartments. Send 'location' field in body if one wants to filter the apartments by location, 'price' if filter by price and 'move_in_date' if filter by month.
 
-* listings/<int:pk>/
+* listings/apartment_id/
 
 parameters - Pass the apartment id in the url.
+
 Output - Dictonary containing apartment details.
 
-* comments/<int:pk>/
+* comments/apartment_id/
 
-paramaeters - Pass the apartment id in the url. 
-The body should contain - 'comment' and 'rating' field. The rating should be an index ranging from 0 to 5.
+To post/create a comment.
+
+Paramaeters - Pass the apartment id in the url. The body should contain - 'comment' and 'rating' field. The rating should be an index ranging from 0 to 5.
 

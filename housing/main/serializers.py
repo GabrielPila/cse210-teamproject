@@ -76,3 +76,23 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Reservation
         field = '__all__'
+
+
+
+
+class HomeGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Home
+        fields = '__all__' 
+
+
+class CommentsGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Comments
+        fields = '__all__' 
+
+
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = '__all__' 

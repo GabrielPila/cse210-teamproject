@@ -57,6 +57,8 @@ class SignUpView(APIView):
         username = request.data.get('username')
         email = request.data.get('email')
         password = request.data.get('password')
+        first_name = request.data.get('first_name')
+        last_name = request.data.get('last_name')
         is_landlord = request.data.get('is_landlord', False)
 
         if User.objects.filter(username=username).exists():
@@ -65,6 +67,8 @@ class SignUpView(APIView):
         user = User(username=username)
         user.set_password(password)
         user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
         user.save()
 
         landlord = Landlord(user = user, is_landlord = is_landlord)
@@ -213,3 +217,41 @@ class CommentsAPIView(views.APIView):
 #                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #         except JSONDecodeError:
 #             return Response({"result": "error","message": "Json decoding error"}, status= 400)
+
+
+from rest_framework.decorators import api_view
+from .serializers import HomeGetSerializer, CommentsGetSerializer, UserGetSerializer
+
+@api_view(['GET'])
+def getHomesData(request):
+    homes = Home.objects.all()
+    serializer = HomeGetSerializer(homes, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getUsersData(request):
+    users = User.objects.all()
+    serializer = UserGetSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getCommentsData(request):
+    coments = Comments.objects.all()
+    serializer = CommentsGetSerializer(coments, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def addHome(request):
+    serializer = HomeGetSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def addComment(request):
+    serializer = CommentsGetSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)

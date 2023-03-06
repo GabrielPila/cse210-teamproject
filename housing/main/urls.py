@@ -16,4 +16,14 @@ urlpatterns = [
     path('listings/', ListingsAPIView.as_view()),
     path('listings/<int:pk>/', HomeAPIView.as_view()),
     path('comments/<int:pk>/', CommentsAPIView.as_view()),
+
+
+    # additional gets
+    path('getcomments/', getCommentsData),
+    path('gethomes/', getHomesData),
+    path('getusers/', getUsersData),
+    
+    # additional posts
+    path('addcomment/', addComment),
+    path('addhome/', addHome),
 ]

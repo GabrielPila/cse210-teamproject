@@ -18,24 +18,13 @@
   }
   
   .login-title {
-
-    /* Welcome to Housing Safari in San Diego */
-
-    /* position: absolute; */
     width: 100%;
-    height: 25vh !important;
-    /* left: 120px; */
-    top: 5vh !important;
-
     font-family: 'Abhaya Libre';
     font-style: normal;
     font-weight: 400;
-    font-size: 12vh;
+    font-size: 5rem;
     line-height: 120%;
-    /* or 101px */
-
     text-align: center;
-
     color: #255849;
   }
 
@@ -46,6 +35,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 2rem;
   }
 
 

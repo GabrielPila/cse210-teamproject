@@ -45,6 +45,7 @@ class HomeSerializer(serializers.ModelSerializer):
             'zipcode',
             'location_lat',
             'location_lon',
+            'photos',
             'built_date',
             'area_sqft',
             'num_bedrooms',

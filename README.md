@@ -43,13 +43,13 @@ Returns a list of apartments. Send 'location' field in body if one wants to filt
 
 * listings/apartment_id/
 
-parameters - Pass the apartment id in the url.
+Parameters - Pass the apartment id in the url.
 
-Output - Dictonary containing apartment details.
+Output - Dictonary containing apartment details, comments sorted by date with user details, landord details, etc. 
 
 * comments/apartment_id/
 
 To post/create a comment.
 
-Paramaeters - Pass the apartment id in the url. The body should contain - 'comment' and 'rating' field. The rating should be an index ranging from 0 to 5.
+Paramaeters - Pass the apartment id in the url. The body should contain - 'comment' and 'rating' field. The rating should be an index ranging from 0 to 5. Returns a response 'Comment added successfully'.
 

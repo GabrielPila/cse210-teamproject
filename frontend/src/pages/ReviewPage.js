@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
-import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Container } from '@mui/material';
 import Navbar from "../components/Navbar"
 import Titlebar from "../components/Titlebar";
@@ -16,6 +17,7 @@ const commentData = {
 
 const ReviewPage = () => {
     const { state } = useLocation();
+    const navigate = useNavigate();
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const {text1, text2, text3, text4, text5} = commentData
@@ -26,19 +28,39 @@ const ReviewPage = () => {
         } else if(comment.trim() === ""){
             alert("Please leave a comment!")
         } else{
-            alert("Submit comment")
-            const allButtons = document.getElementsByClassName("review-icon");
-            for (let i = 0; i < allButtons.length; i++) {
-                allButtons[i].style.backgroundColor =  "#F1EDE3";
-            }
-            setComment("");
-            setRating(0);
+            const token = localStorage.getItem("token") || ""
+            const body = JSON.stringify({ comment, rating });
+            const config = {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${token}`
+                },
+            };
+
+            axios.post(`http://localhost:8000/comments/${state.id}/`, body, config)
+            .then(res => {
+                if(res.data.message === "Comment added successfully"){
+                    setComment("");
+                    setRating(0);
+                    const allButtons = document.getElementsByClassName("review-icon");
+                    for (let i = 0; i < allButtons.length; i++) {
+                        allButtons[i].style.backgroundColor =  "#F1EDE3";
+                    }
+                    navigate(-1)
+                };
+            })
+            .catch(e => {
+                console.log(e)
+                alert("Something went wrong. Please try again!")
+            });
+            
+            
         }
     }
     const onIconClick = (e) => {
         const value = e.target.dataset.value
         setRating(value);
-        console.log(state.listingId)
     }
 
     useEffect(() => {

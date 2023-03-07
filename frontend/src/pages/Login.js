@@ -20,11 +20,13 @@ const Login = () => {
     e.preventDefault();
 
     // login 
+    const token = localStorage.getItem("token") || "";
     const body = JSON.stringify({ username, password });
     const config = {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
     };
 

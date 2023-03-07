@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Navigate, Link, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Grid, Select } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
-// import Dropdown_Price from "../components/Dropdown_Price.js";
-// import Dropdown_MoveIn from "../components/Dropdown_MoveIn.js";
+import withAuth from "../hooks/withAuth";
 import search_page from "../pics/search-page.png";
 import "../styles/SearchPage.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -44,6 +43,7 @@ function Search() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token") || ""
     const body = {
       location: location,
       price: parseInt(price),
@@ -52,13 +52,13 @@ function Search() {
 
     const priceInt = parseInt(price);
     let param = {};
-    if (location != "") {
+    if (location !== "") {
       param["location"] = location;
     }
-    if (price != null) {
+    if (price !== null) {
       param["price"] = priceInt;
     }
-    if (startDate != null) {
+    if (startDate !== null) {
       param["move_in_date"] = startDate.toDateString(); // 'Tue Feb 28 2023'
     }
 
@@ -66,6 +66,7 @@ function Search() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        // "Authorization": `Bearer ${token}`
       },
       params: param,
     };
@@ -174,4 +175,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default withAuth(Search);

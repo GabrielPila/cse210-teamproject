@@ -17,6 +17,7 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedin] = useState(tokenInLocalStorage);
   const navigate = useNavigate();
   const logout = () => {
+    localStorage.setItem("username", "")
     localStorage.setItem("token", "")
     setIsLoggedin(false)
     navigate('/login');

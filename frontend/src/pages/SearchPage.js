@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import DatePicker from "react-datepicker";
 import { Container, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
-import withAuth from "../hooks/withAuth";
 import search_page from "../pics/search-page.png";
 import "../styles/SearchPage.css";
 import "bootstrap/dist/css/bootstrap.css";
-import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 function Search() {
@@ -25,8 +23,8 @@ function Search() {
     price: null,
     moveInDate: "",
   });
-  const [pageSearched, setSearched] = useState(false);
-  const { location, price, moveInDate } = formData;
+  
+  const { location, price} = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -43,12 +41,11 @@ function Search() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token") || ""
-    const body = {
-      location: location,
-      price: parseInt(price),
-      move_in_date: Date.parse(moveInDate),
-    };
+    // const body = {
+    //   location: location,
+    //   price: parseInt(price),
+    //   move_in_date: Date.parse(moveInDate),
+    // };
 
     const priceInt = parseInt(price);
     let param = {};
@@ -66,7 +63,6 @@ function Search() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // "Authorization": `Bearer ${token}`
       },
       params: param,
     };
@@ -90,7 +86,7 @@ function Search() {
             images: images,
           };
         });
-        setSearched(true);
+        
         navigate("/list", {
           state: {
             listings,
@@ -99,16 +95,6 @@ function Search() {
       })
       .catch((e) => console.log(e));
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("token") === "") {
-      navigate("/login");
-    }
-  }, []);
-
-  if (pageSearched) {
-    return <Navigate to="/list/" />;
-  }
 
   return (
     <Container className="search-Auth-form-container" maxWidth={false}>
@@ -154,12 +140,12 @@ function Search() {
               </div>
             </div>
 
-            <div className="col  form-group ">
+            <div className="col form-group ">
               <button
                 type="Search submit"
                 className="search-button"
               >
-                <a>Search</a>
+                Search
               </button>
             </div>
           </form>
@@ -167,7 +153,7 @@ function Search() {
 
         <Grid item xs={12} className="search-grid-item-4">
           <div>
-            <img src={search_page} style={{ width: "100%", height: "280px" }} />
+            <img src={search_page} alt="search-images" style={{ width: "100%", height: "280px" }} />
           </div>
         </Grid>
       </Grid>
@@ -175,4 +161,4 @@ function Search() {
   );
 }
 
-export default withAuth(Search);
+export default Search;

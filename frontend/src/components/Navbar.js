@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,19 +7,22 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import RoofingIcon from '@mui/icons-material/Roofing';
 import MenuIcon from '@mui/icons-material/Menu';
-import {useLocation, useNavigate} from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 import "../styles/Navbar.css"
 
 export default function Navbar() {
+  const {token, setUsername, setToken} = useContext(AppContext);
+  const navigate = useNavigate();
   const location = useLocation();
   const {pathname} = location;
-  const token = localStorage.getItem("token")
   const tokenInLocalStorage = (token === "") ? false: true;
   const [isLoggedIn, setIsLoggedin] = useState(tokenInLocalStorage);
-  const navigate = useNavigate();
+ 
   const logout = () => {
     localStorage.setItem("username", "")
     localStorage.setItem("token", "")
+    setToken("")
+    setUsername("")
     setIsLoggedin(false)
     navigate('/login');
   }

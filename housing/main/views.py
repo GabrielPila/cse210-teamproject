@@ -57,8 +57,8 @@ class SignUpView(APIView):
         username = request.data.get('username')
         email = request.data.get('email')
         password = request.data.get('password')
-        first_name = request.data.get('first_name')
-        last_name = request.data.get('last_name')
+        first_name = request.data.get('first_name', 'User Name')
+        last_name = request.data.get('last_name', '(858)-567-7800')
         is_landlord = request.data.get('is_landlord', False)
 
         if User.objects.filter(username=username).exists():
@@ -134,7 +134,7 @@ class ListingsAPIView(APIView):
                     Q(address__icontains=location)
                 )
 
-        if 'price' in all_params:
+        if 'price' in all_params and all_params['price'] != 'Nan':
             price = int(all_params['price'])
             homes = homes.filter(current_price_month__lte=price)
 

@@ -1,4 +1,5 @@
 import { Container, Grid} from '@mui/material';
+import axios from 'axios';
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import Navbar from "../components/Navbar"
@@ -12,12 +13,9 @@ import SingleListingImageGallery from '../components/SingleListingImageGallery';
 
 const SingleListingPage = () => {
     const {state} = useLocation();
-    // need title, images, mainListingInfo, landlordInfo, and reviews from the previous page dont need state on this page
-    const id = state.id;
-    const images = state.images;
-    const mainInfo = state.mainInfo;
-    const title = `Student Apartment ${id}...`;
-    
+    const token = localStorage.getItem("token") || "";
+    // need title, images, mainListingInfo, landlordInfo from the previous page
+    // only state is reviews so we can update if users add comment
     // const mainInfo = {
     //     price: 1000,
     //     bedroom: 1,
@@ -25,46 +23,67 @@ const SingleListingPage = () => {
     //     date: "June 1st 2023",
     //     features: ["oven", "bathroom", "kitchen"]
     // };
+    const id = state.id;
+    const images = state.images;
+    const mainInfo = state.mainInfo;
+    const title = `Student Apartment ${id}...`;
     const [avgRating, setAvgRating] = useState(0);
-    const reviews = [
-        {   
-            id: 1,
-            rating: 5,
-            date: "2023/05/02",
-            comment: "Great House"
-        }, 
-        {
-            id: 2,
-            rating: 4,
-            date: "2023/01/03",
-            comment: "Great House!!!!!"
-        }, 
-        {
-            id:3, 
-            rating: 2,
-            date: "2023/02/01",
-            comment: "Terrible House"
-        },
-        {   
-            id: 4,
-            rating: 5,
-            date: "2023/05/02",
-            comment: "Great House"
-        }, 
-        {
-            id: 5,
-            rating: 4,
-            date: "2023/01/03",
-            comment: "Great House!!!!!"
-        }, 
-        {
-            id:6, 
-            rating: 2,
-            date: "2023/02/01",
-            comment: "Terrible House"
-        }, 
+    const [reviews, setReviews] = useState([]);
+    useEffect(()=> {
+        const config = {
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${token}`
+          },
+        };
+        axios.get(`http://localhost:8000/listings/${id}/`, config).then((res) => {
+            const dataReviews = res.data.comments_home;
+            setReviews(dataReviews)
+        })
+        .catch( e => {
+            console.log(e)
+        });
+    }, [id, token])
+    // const reviews = [
+    //     {   
+    //         id: 1,
+    //         rating: 5,
+    //         date: "2023/05/02",
+    //         comment: "Great House"
+    //     }, 
+    //     {
+    //         id: 2,
+    //         rating: 4,
+    //         date: "2023/01/03",
+    //         comment: "Great House!!!!!"
+    //     }, 
+    //     {
+    //         id:3, 
+    //         rating: 2,
+    //         date: "2023/02/01",
+    //         comment: "Terrible House"
+    //     },
+    //     {   
+    //         id: 4,
+    //         rating: 5,
+    //         date: "2023/05/02",
+    //         comment: "Great House"
+    //     }, 
+    //     {
+    //         id: 5,
+    //         rating: 4,
+    //         date: "2023/01/03",
+    //         comment: "Great House!!!!!"
+    //     }, 
+    //     {
+    //         id:6, 
+    //         rating: 2,
+    //         date: "2023/02/01",
+    //         comment: "Terrible House"
+    //     }, 
 
-    ]
+    // ]
 
     const landlordInfo = {
         name: "Will",
@@ -79,7 +98,10 @@ const SingleListingPage = () => {
         for (let review of reviews){    
             total += review.rating
         }
-        const avg = total / reviews.length;
+        let avg = total / reviews.length;
+        if (isNaN(parseFloat(avg))){
+            avg = 0
+        }
         setAvgRating(avg)
     }, [reviews])
 
@@ -99,7 +121,7 @@ const SingleListingPage = () => {
                         <LandlordInfo {...landlordInfo}/>
                     </Grid>
                     <Grid item xs={12} md={8} className="grid-item-4">
-                        <Reviews reviews={reviews} avgRating={avgRating}/>
+                        <Reviews reviews={reviews} avgRating={avgRating} id={id}/>
                     </Grid>
                 </Grid>
             </Container>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Review from '../components/Review';
 import "../styles/Reviews.css"
 
-const Reviews = ({reviews, avgRating}) => {
+const Reviews = ({reviews, avgRating, id}) => {
     return (
         <div className="reviews">
             <div className="reviews-content">
@@ -24,7 +24,7 @@ const Reviews = ({reviews, avgRating}) => {
                     )}
                 </div>
                 <div className='reviews-button-div'>
-                    <Link className="reviews-link" to="/reviewPage"  state={{ listingId: "1234" }}>
+                    <Link className="reviews-link" to="/reviewPage"  state={{ id: id }}>
                         <Button className="reviews-button" variant="contained">Comment</Button>
                     </Link>
                 </div>

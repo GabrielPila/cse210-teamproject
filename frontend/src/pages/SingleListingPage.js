@@ -1,7 +1,8 @@
-import { Container, Grid} from '@mui/material';
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
-import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
+import { Container, Grid} from '@mui/material';
+import { AppContext } from "../context/AppContext";
 import Navbar from "../components/Navbar"
 import Titlebar from "../components/Titlebar";
 import LandlordInfo from '../components/LandlordInfo';
@@ -10,23 +11,17 @@ import ListingMain from '../components/ListingMain';
 import Reviews from "../components/Reviews"
 import SingleListingImageGallery from '../components/SingleListingImageGallery';
 
-
 const SingleListingPage = () => {
-    const {state} = useLocation();
-    const token = localStorage.getItem("token") || "";
     // need title, images, mainListingInfo, landlordInfo from the previous page
     // only state is reviews so we can update if users add comment
-    // const mainInfo = {
-    //     price: 1000,
-    //     bedroom: 1,
-    //     bathroom: 1,
-    //     date: "June 1st 2023",
-    //     features: ["oven", "bathroom", "kitchen"]
-    // };
-    const id = state.id;
-    const images = state.images;
-    const mainInfo = state.mainInfo;
-    const title = `Student Apartment ${id}...`;
+    const {state} = useLocation();
+    const {un, t} = useContext(AppContext);
+    console.log(un, t)
+    const token = localStorage.getItem("token") || "";
+    const id = state?.id || "";
+    const images = state?.images || [];
+    const mainInfo = state?.mainInfo || {};
+    const title = state?.name || "";
     const [avgRating, setAvgRating] = useState(0);
     const [reviews, setReviews] = useState([]);
     useEffect(()=> {
@@ -45,52 +40,13 @@ const SingleListingPage = () => {
             console.log(e)
         });
     }, [id, token])
-    // const reviews = [
-    //     {   
-    //         id: 1,
-    //         rating: 5,
-    //         date: "2023/05/02",
-    //         comment: "Great House"
-    //     }, 
-    //     {
-    //         id: 2,
-    //         rating: 4,
-    //         date: "2023/01/03",
-    //         comment: "Great House!!!!!"
-    //     }, 
-    //     {
-    //         id:3, 
-    //         rating: 2,
-    //         date: "2023/02/01",
-    //         comment: "Terrible House"
-    //     },
-    //     {   
-    //         id: 4,
-    //         rating: 5,
-    //         date: "2023/05/02",
-    //         comment: "Great House"
-    //     }, 
-    //     {
-    //         id: 5,
-    //         rating: 4,
-    //         date: "2023/01/03",
-    //         comment: "Great House!!!!!"
-    //     }, 
-    //     {
-    //         id:6, 
-    //         rating: 2,
-    //         date: "2023/02/01",
-    //         comment: "Terrible House"
-    //     }, 
-
-    // ]
 
     const landlordInfo = {
-        name: "Will",
-        email: "adfsdf@ucsd.edu",
-        number: "(123)456-7890",
-        videoAvailability: false,
-        averageResponseTime: 1
+        name: mainInfo.landlordName || "Will",
+        email: mainInfo.email || "default@gmail.com",
+        number: mainInfo.number || "(858)123-4567",
+        videoAvailability: Math.random() < 0.5 ? true : false,
+        averageResponseTime: Math.floor(Math.random() * 5)
     }
     
     useEffect(()=> { 
@@ -106,7 +62,9 @@ const SingleListingPage = () => {
     }, [reviews])
 
     return (
-        <div className='single-listing-page'>
+        <>
+        {((un !== "" && un !== undefined ) && (t !== "" || t !== undefined)) ? 
+        (<div className='single-listing-page'>
             <Container className="single-listing-page-container" maxWidth={false}>
                 <Navbar />
                 <Titlebar title={title}/>
@@ -125,8 +83,9 @@ const SingleListingPage = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </div> ) : (<Navigate to="/login" replace={true}/>)}
+        </>
     )
 }
 
-export default SingleListingPage
+export default SingleListingPage;

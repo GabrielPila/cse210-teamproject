@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   const navigateToSearch = () => {
-    navigate('/search');
+    navigate('/');
   };
 
   return (

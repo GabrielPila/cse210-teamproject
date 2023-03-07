@@ -10,13 +10,10 @@ import "../styles/LoginNavbar.css"
 import {useNavigate} from 'react-router-dom';
 
 
-
-
-
 export default function LoginNavbar() {
   const navigate = useNavigate();
   const navigateToHome = () => {
-    navigate('/search/');
+    navigate('/');
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

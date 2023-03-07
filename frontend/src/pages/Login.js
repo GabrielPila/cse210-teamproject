@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Container, Grid } from "@mui/material";
 import { AppContext } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import "../styles/Login.css";
 
 const Login = () => {
-  const {setUsername, setToken} = useContext(AppContext);
   const navigate = useNavigate();
+  const {un, token, setUsername, setToken} = useContext(AppContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -32,12 +32,14 @@ const Login = () => {
 
     axios.post("http://localhost:8000/login/", body, config)
     .then((res) => {
+      console.log(body)
       if (res.data.error) {
         // send some alert: "mismatch username or password"
         console.log("error", res.data.error);
       } else{
         setUsername(formData.username)
         setToken(res.data.token)
+        localStorage.setItem("username", formData.username)
         localStorage.setItem("token", res.data.token)
         navigate("/")
       }
@@ -54,7 +56,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <>
+    {(un === "" || token === "") ? <div className="login-page">
         <Container className="login-page-container">
           <Navbar />
           <h3 className="login-title">
@@ -103,8 +106,9 @@ const Login = () => {
             </button>
           </form>
         </Container>
-    </div>
-  );
+    </div> : (<Navigate to="/" replace={true}/>)}
+    </>
+  )
 };
 
 

@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import { Container, Grid } from "@mui/material";
+import { AppContext } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import search_page from "../pics/search-page.png";
 import "../styles/SearchPage.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-function Search() {
-  // add token to the reqs
-  axios.defaults.headers.common[
+function SearchPage() {
+  const navigate = useNavigate();
+  const {un, token} = useContext(AppContext);
+   // add token to the reqs
+   axios.defaults.headers.common[
     "Authorization"
   ] = `Token ${localStorage.getItem("token")}`;
 
-  const navigate = useNavigate();
+
   const [startDate, setStartDate] = useState(new Date());
 
   const [formData, setFormData] = useState({
@@ -25,28 +28,9 @@ function Search() {
   });
   
   const { location, price} = formData;
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
-  ];
-
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
   const onSubmit = (e) => {
     e.preventDefault();
-    // const body = {
-    //   location: location,
-    //   price: parseInt(price),
-    //   move_in_date: Date.parse(moveInDate),
-    // };
-
     const priceInt = parseInt(price);
     let param = {};
     if (location !== "") {
@@ -72,14 +56,20 @@ function Search() {
       .then((res) => {
         console.log(res);
         const data = res.data;
+        const images = data.map((listing, i) => {
+          return {
+            original: listing.photos[i]
+          }
+        })
         const listings = data.map((listing) => {
           return {
             id: listing.id,
             mainInfo: {
               name: listing.title,
               price: listing.current_price_month,
-              bedroom: listing.num_bathrooms,
+              bedroom: listing.num_bedrooms,
               bathroom: listing.num_bathrooms,
+              landlordName: listing.landlord.username,
               email: listing.landlord.email,
               number: 123456,
             },
@@ -97,7 +87,9 @@ function Search() {
   };
 
   return (
-    <Container className="search-Auth-form-container" maxWidth={false}>
+    <>
+    {((un !== "" && un !== undefined ) && (token !== "" || token !== undefined)) ? 
+    (<Container className="search-Auth-form-container" maxWidth={false}>
       <Navbar />
       <Grid container spacing={1} className="search-grid-container">
         <Grid item xs={12} className="search-grid-item-1">
@@ -157,8 +149,9 @@ function Search() {
           </div>
         </Grid>
       </Grid>
-    </Container>
+    </Container> ) : (<Navigate to="/login" replace={true}/>)}
+    </>
   );
 }
 
-export default Search;
+export default SearchPage;

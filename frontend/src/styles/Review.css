@@ -6,3 +6,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.review-comment{
+    margin-right: 5px;
+}
+
+.review-date{
+    font-size: 0.75rem;
+}

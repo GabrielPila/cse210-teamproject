@@ -1,7 +1,8 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate} from "react-router-dom";
 import { Button, Container } from '@mui/material';
+import { AppContext } from "../context/AppContext";
 import Navbar from "../components/Navbar"
 import Titlebar from "../components/Titlebar";
 import "../styles/ReviewPage.css"
@@ -18,6 +19,7 @@ const commentData = {
 const ReviewPage = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
+    const {un, token} = useContext(AppContext);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const {text1, text2, text3, text4, text5} = commentData
@@ -78,6 +80,9 @@ const ReviewPage = () => {
     }, [rating]);
 
     return (
+        <>
+    {((un !== "" && un !== undefined ) && (token !== "" || token !== undefined)) ? 
+    (
         <div className="review-page">
             <Container className="review-page-container" maxWidth={false}>
                 <Navbar />
@@ -109,7 +114,8 @@ const ReviewPage = () => {
                     
                 </div>
             </Container>
-        </div>
+        </div>) : (<Navigate to="/login" replace={true}/>)}
+    </>
     )
 }
 

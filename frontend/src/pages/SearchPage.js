@@ -15,9 +15,9 @@ function SearchPage() {
   const {username, token} = useContext(AppContext);
   console.log(username, token)
    // add token to the reqs
-   axios.defaults.headers.common[
-    "Authorization"
-  ] = `Token ${localStorage.getItem("token")}`;
+  // axios.defaults.headers.common[
+  //   "Authorization"
+  // ] = `Token ${localStorage.getItem("token")}`;
 
 
   const [startDate, setStartDate] = useState(new Date());
@@ -48,9 +48,12 @@ function SearchPage() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
       },
       params: param,
     };
+
+    console.log(config)
 
     axios
       .get("http://localhost:8000/listings/", config)

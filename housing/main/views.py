@@ -27,8 +27,7 @@ logger = logging.getLogger("mylogger")
 
 class HomeView(APIView):
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Hello, World!'})
-
+        return render(request, "index.html")
 
 class SearchView(APIView):
     

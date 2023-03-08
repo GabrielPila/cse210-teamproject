@@ -12,7 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function SearchPage() {
   const navigate = useNavigate();
-  const {un, token} = useContext(AppContext);
+  const {username, token} = useContext(AppContext);
+  console.log(username, token)
    // add token to the reqs
    axios.defaults.headers.common[
     "Authorization"
@@ -88,7 +89,7 @@ function SearchPage() {
 
   return (
     <>
-    {((un !== "" && un !== undefined ) && (token !== "" || token !== undefined)) ? 
+    {((username !== "" && username !== undefined ) && (token !== "" || token !== undefined)) ? 
     (<Container className="search-Auth-form-container" maxWidth={false}>
       <Navbar />
       <Grid container spacing={1} className="search-grid-container">

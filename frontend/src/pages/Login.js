@@ -8,21 +8,26 @@ import "../styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const {un, token, setUsername, setToken} = useContext(AppContext);
+  const {username, token, setUsername, setToken} = useContext(AppContext);
   const [formData, setFormData] = useState({
-    username: "",
+    formUsername: "",
     password: "",
   });
   
-  const { username, password } = formData;
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const { formUsername, password } = formData;
+  const onChange = (e) => {
+    const newFormData = {
+      ...formData, 
+      [e.target.name]: e.target.value
+    }
+    setFormData(newFormData);
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     // login 
-    const body = JSON.stringify({ username, password });
+    const body = JSON.stringify({ username:formUsername, password });
     const config = {
       headers: {
         "Accept": "application/json",
@@ -32,14 +37,13 @@ const Login = () => {
 
     axios.post("http://localhost:8000/login/", body, config)
     .then((res) => {
-      console.log(body)
       if (res.data.error) {
         // send some alert: "mismatch username or password"
         console.log("error", res.data.error);
       } else{
-        setUsername(formData.username)
+        setUsername(formData.formUsername)
         setToken(res.data.token)
-        localStorage.setItem("username", formData.username)
+        localStorage.setItem("username", formData.formUsername)
         localStorage.setItem("token", res.data.token)
         navigate("/")
       }
@@ -57,7 +61,7 @@ const Login = () => {
 
   return (
     <>
-    {(un === "" || token === "") ? <div className="login-page">
+    {(username === "" || username === undefined || token === undefined || token === "") ? <div className="login-page">
         <Container className="login-page-container">
           <Navbar />
           <h3 className="login-title">
@@ -74,9 +78,9 @@ const Login = () => {
                   type="text"
                   className=""
                   placeholder="Enter your username..."
-                  name="username"
-                  onChange={(e) => onChange(e)}
-                  value={username}
+                  name="formUsername"
+                  onChange={onChange}
+                  value={formUsername}
                   required
                 />
               </Grid>
@@ -93,7 +97,7 @@ const Login = () => {
                     className=""
                     placeholder="Enter your password..."
                     name="password"
-                    onChange={(e) => onChange(e)}
+                    onChange={onChange}
                     value={password}
                     required
                     minLength="6"

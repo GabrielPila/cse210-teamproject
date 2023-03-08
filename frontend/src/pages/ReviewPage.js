@@ -19,7 +19,7 @@ const commentData = {
 const ReviewPage = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const {un, token} = useContext(AppContext);
+    const {username, token} = useContext(AppContext);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const {text1, text2, text3, text4, text5} = commentData
@@ -81,7 +81,7 @@ const ReviewPage = () => {
 
     return (
         <>
-    {((un !== "" && un !== undefined ) && (token !== "" || token !== undefined)) ? 
+    {((username !== "" && username !== undefined ) && (token !== "" || token !== undefined)) ? 
     (
         <div className="review-page">
             <Container className="review-page-container" maxWidth={false}>

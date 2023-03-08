@@ -15,9 +15,8 @@ const SingleListingPage = () => {
     // need title, images, mainListingInfo, landlordInfo from the previous page
     // only state is reviews so we can update if users add comment
     const {state} = useLocation();
-    const {un, t} = useContext(AppContext);
-    console.log(un, t)
-    const token = localStorage.getItem("token") || "";
+    const {username, token} = useContext(AppContext);
+    //const token = localStorage.getItem("token") || "";
     const id = state?.id || "";
     const images = state?.images || [];
     const mainInfo = state?.mainInfo || {};
@@ -63,7 +62,7 @@ const SingleListingPage = () => {
 
     return (
         <>
-        {((un !== "" && un !== undefined ) && (t !== "" || t !== undefined)) ? 
+        {((username !== "" && username !== undefined ) && (token !== "" || token !== undefined)) ? 
         (<div className='single-listing-page'>
             <Container className="single-listing-page-container" maxWidth={false}>
                 <Navbar />

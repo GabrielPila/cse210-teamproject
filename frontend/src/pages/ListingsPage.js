@@ -11,11 +11,11 @@ import "../styles/ListingsPage.css";
 
 const ListingsPage = () => {
   const {state} = useLocation();
-  const {un, token} = useContext(AppContext);
+  const {username, token} = useContext(AppContext);
   const listings = state?.listings || [];
   return (
     <>
-    {((un !== "" && un !== undefined ) && (token !== "" || token !== undefined)) ? 
+    {((username !== "" && username !== undefined ) && (token !== "" || token !== undefined)) ? 
     (<div className='listings-page'>
       <Container className="listings-page-container" maxWidth={false}>
         <Navbar />

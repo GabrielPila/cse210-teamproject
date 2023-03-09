@@ -54,6 +54,7 @@ export const register = (username, password, email) => {
       // console.log("resdata", res.data.error);
       if (res.data.error) {
         console.log("error", res.data.error);
+        alert("User already exists, please login!")
         //     dispatch({
         //       type: REGISTER_FAIL,
         //     });

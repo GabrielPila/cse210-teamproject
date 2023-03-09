@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
-import { Container, Grid } from "@mui/material";
+import { Alert, Container, Grid } from "@mui/material";
 import { AppContext } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import search_page from "../pics/search-page.png";
@@ -52,7 +52,7 @@ function SearchPage() {
       },
       params: param,
     };
-
+    
     console.log(config)
 
     axios
@@ -60,32 +60,36 @@ function SearchPage() {
       .then((res) => {
         console.log(res);
         const data = res.data;
-        const images = data.map((listing, i) => {
-          return {
-            original: listing.photos[i]
-          }
-        })
-        const listings = data.map((listing) => {
-          return {
-            id: listing.id,
-            mainInfo: {
-              name: listing.title,
-              price: listing.current_price_month,
-              bedroom: listing.num_bedrooms,
-              bathroom: listing.num_bathrooms,
-              landlordName: listing.landlord.username,
-              email: listing.landlord.email,
-              number: 123456,
+        console.log(data[0])
+        if (data.length === 1 && data[0].message){
+          alert(data[0].message)
+        }else{
+          const images = data.map((listing, i) => {
+            return {
+              original: listing.photos[i]
+            }
+          })
+          const listings = data.map((listing) => {
+            return {
+              id: listing.id,
+              mainInfo: {
+                name: listing.title,
+                price: listing.current_price_month,
+                bedroom: listing.num_bedrooms,
+                bathroom: listing.num_bathrooms,
+                landlordName: listing.landlord.username,
+                email: listing.landlord.email,
+                number: 123456,
+              },
+              images: images,
+            };
+          });
+          navigate("/list", {
+            state: {
+              listings,
             },
-            images: images,
-          };
-        });
-        
-        navigate("/list", {
-          state: {
-            listings,
-          },
-        });
+          });
+      }
       })
       .catch((e) => console.log(e));
   };
@@ -101,7 +105,6 @@ function SearchPage() {
             Find Your Home with San Diego Housing Safari
           </div>
         </Grid>
-
         <Grid item xs={14} className="search-grid-item-2">
           <form className="search-forms" onSubmit={(e) => onSubmit(e)}>
             <div className="col  form-group ">
@@ -121,7 +124,7 @@ function SearchPage() {
                 value={price}
                 onChange={(e) => onChange(e)}
                 className="price-placeholder"
-                placeholder="type your price"
+                placeholder="type the maximun price"
               />
             </div>
 

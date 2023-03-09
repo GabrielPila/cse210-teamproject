@@ -45,7 +45,7 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
         
         if not user:
-            return Response({'error': "User not found"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': "User not found"})
         
         token = Token.objects.get(user=user)
         return Response({'token': token.key})
@@ -61,7 +61,7 @@ class SignUpView(APIView):
         is_landlord = request.data.get('is_landlord', False)
 
         if User.objects.filter(username=username).exists():
-            return Response({'error': "User already exists"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': "User already exists"})
 
         user = User(username=username)
         user.set_password(password)

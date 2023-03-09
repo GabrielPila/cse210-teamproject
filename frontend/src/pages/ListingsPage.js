@@ -21,9 +21,11 @@ const ListingsPage = () => {
         <Navbar />
         <Titlebar title="Your Next Home..."/>
         <div className="list-page">
-          {listings.map((home) => (
+          {listings.length === 0 ? (<h1 className="listings-no-results">No Results</h1>) : 
+          (listings.map((home) => (
             <Listedpage key={home.id} {...home} />
-          ))}
+          )))
+          }
         </div>
       </Container> 
       </div>) : (<Navigate to="/login" replace={true}/>)}

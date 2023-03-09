@@ -132,10 +132,15 @@ class ListingsAPIView(APIView):
                     Q(city__icontains=location) | 
                     Q(address__icontains=location)
                 )
+            if len(homes) == 0:
+                return Response([{'message': 'no house at this location! '}])
 
         if 'price' in all_params and all_params['price'] != 'Nan':
             price = int(all_params['price'])
             homes = homes.filter(current_price_month__lte=price)
+            if len(homes) == 0:
+                
+                return Response([{'message': 'no house under this price! '}])
 
         if 'move_in_date' in all_params: # 'Tue Feb 28 2023'
             # change the move in date to be lte 
@@ -160,6 +165,8 @@ class ListingsAPIView(APIView):
             date = datetime.strptime(date, "%Y-%m-%d").date()
     
             homes = homes.filter(move_in_date__lte=date)
+            if len(homes) == 0:
+                return Response([{'message': 'no house avaliable before this date! '}])
 
         serializer = HomeSerializer(homes, many=True)
         return Response(serializer.data)

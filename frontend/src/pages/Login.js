@@ -40,6 +40,7 @@ const Login = () => {
       if (res.data.error) {
         // send some alert: "mismatch username or password"
         console.log("error", res.data.error);
+        alert('User not found, please register first! ')
       } else{
         setUsername(formData.formUsername)
         setToken(res.data.token)

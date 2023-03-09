@@ -124,7 +124,8 @@ function SearchPage() {
                 value={price}
                 onChange={(e) => onChange(e)}
                 className="price-placeholder"
-                placeholder="type the maximun price"
+                placeholder="maximum price"
+
               />
             </div>
 

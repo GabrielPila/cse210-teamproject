@@ -14,11 +14,6 @@ function SearchPage() {
   const navigate = useNavigate();
   const {username, token} = useContext(AppContext);
   console.log(username, token)
-   // add token to the reqs
-  // axios.defaults.headers.common[
-  //   "Authorization"
-  // ] = `Token ${localStorage.getItem("token")}`;
-
 
   const [startDate, setStartDate] = useState(new Date());
 

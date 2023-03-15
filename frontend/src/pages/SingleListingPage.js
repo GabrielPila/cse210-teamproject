@@ -16,7 +16,6 @@ const SingleListingPage = () => {
     // only state is reviews so we can update if users add comment
     const {state} = useLocation();
     const {username, token} = useContext(AppContext);
-    //const token = localStorage.getItem("token") || "";
     const id = state?.id || "";
     const images = state?.images || [];
     const mainInfo = state?.mainInfo || {};

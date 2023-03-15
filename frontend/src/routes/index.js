@@ -7,7 +7,6 @@ import Signup from '../pages/Signup.js';
 import ListingsPage from '../pages/ListingsPage.js';
 
 
-// the path should be same with django urls so that they can be rendered 
 const routes = [
         {
           path: "/",
